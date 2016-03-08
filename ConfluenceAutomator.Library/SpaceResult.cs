@@ -4,21 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfluenceAutomator
+namespace ConfluenceAutomator.Library
 {
-
-    public class Plain
-    {
-        public string value { get; set; }
-        public string representation { get; set; }
-    }
-
     public class Expandable
     {
         public string view { get; set; }
     }
 
-    public class Description
+    public class Description2
     {
         public Plain plain { get; set; }
         public Expandable _expandable { get; set; }
@@ -79,7 +72,7 @@ namespace ConfluenceAutomator
         public int id { get; set; }
         public string key { get; set; }
         public string name { get; set; }
-        public Description description { get; set; }
+        public Description2 description { get; set; }
         public Homepage homepage { get; set; }
         public string type { get; set; }
         public Links2 _links { get; set; }

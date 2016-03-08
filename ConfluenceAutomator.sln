@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceAutomator", "ConfluenceAutomator\ConfluenceAutomator.csproj", "{1A40C86D-52B4-4C31-BD84-C094897FF868}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceAutomator.WinForms", "ConfluenceAutomator.WinForms\ConfluenceAutomator.WinForms.csproj", "{3B4CE189-5E9B-448F-B593-B2AE380CA4B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceAutomator.Library", "ConfluenceAutomator.Library\ConfluenceAutomator.Library.csproj", "{17A74FB4-4161-4BCF-B70E-337E702E0131}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1A40C86D-52B4-4C31-BD84-C094897FF868}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A40C86D-52B4-4C31-BD84-C094897FF868}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A40C86D-52B4-4C31-BD84-C094897FF868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B4CE189-5E9B-448F-B593-B2AE380CA4B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B4CE189-5E9B-448F-B593-B2AE380CA4B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B4CE189-5E9B-448F-B593-B2AE380CA4B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B4CE189-5E9B-448F-B593-B2AE380CA4B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17A74FB4-4161-4BCF-B70E-337E702E0131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A74FB4-4161-4BCF-B70E-337E702E0131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A74FB4-4161-4BCF-B70E-337E702E0131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A74FB4-4161-4BCF-B70E-337E702E0131}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
