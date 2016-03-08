@@ -37,13 +37,23 @@ namespace ConfluenceAutomator.WinForms
                 return;
             }
 
+            this.RunButton.Enabled = false;
+            this.CancelButton.Enabled = false;
+
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
             task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text);
+            this.RunButton.Enabled = true;
+            this.CancelButton.Enabled = true;
         }
 
         public void Log(string message)
         {
             this.LogTextbox.AppendText(message + Environment.NewLine);
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

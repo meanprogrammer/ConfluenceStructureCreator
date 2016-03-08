@@ -32,7 +32,7 @@ namespace ConfluenceAutomator.Library
                 }
             }
 
-            
+            logger.Log("Task Complete.");
         }
 
 
