@@ -23,11 +23,11 @@ namespace ConfluenceAutomator.Library
             logger.Log("Created Root Space ...");
             foreach (KeyValuePair<string, List<string>> page in list)
             {
-                var rootPage = CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Key)));
+                var rootPage = CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Key, AppSettingsHelper.GetValue("parentPageChildrenDisplay"))));
                 logger.Log(string.Format("Created the root page : {0}", page.Key));
                 foreach (string t in page.Value)
                 {
-                    CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t)));
+                    CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t, string.Empty)));
                     logger.Log(string.Format("Created the child page : {0}", t));    
                 }
             }
@@ -66,7 +66,7 @@ namespace ConfluenceAutomator.Library
             return obj;
         }
 
-        private static ChildPage CreateChildPageInstance(string key, string rootId, string title)
+        private static ChildPage CreateChildPageInstance(string key, string rootId, string title, string value)
         {
             ChildPage cp = new ChildPage();
             cp.ancestors = new List<ChildPageAncestor>();
@@ -74,7 +74,7 @@ namespace ConfluenceAutomator.Library
             cp.title = title;
             cp.type = "page";
             cp.space = new ChildPageSpace() { key = key };
-            cp.body = new ChildPageBody() { storage = new ChildPageStorage() { representation = "storage", value = "<p></p>" } };
+            cp.body = new ChildPageBody() { storage = new ChildPageStorage() { representation = "storage", value = string.Format("<p>{0}</p>", value) } };
 
             return cp;
         }
