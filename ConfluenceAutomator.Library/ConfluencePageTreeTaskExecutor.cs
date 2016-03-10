@@ -17,17 +17,17 @@ namespace ConfluenceAutomator.Library
 
         public void Execute(IFormLogger logger, string name, string key, string description)
         {
-            var list = StructureConstant.GetStructure();
+            var list = StructureConstant.GetTaxonomy();
             logger.Log("Grabbing structure ...");
             var rootSpace = ExecuteNonCurl(createSpaceUrl, ConvertToJson(CreateSpaceInstance(name, key, description)));
             logger.Log("Created Root Space ...");
-            foreach (KeyValuePair<string, List<string>> page in list)
+            foreach (ConfluencePage page in list)
             {
-                var rootPage = CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Key, AppSettingsHelper.GetValue("parentPageChildrenDisplay"))));
-                logger.Log(string.Format("Created the root page : {0}", page.Key));
-                foreach (string t in page.Value)
+                var rootPage = CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Title, page.Content)));
+                logger.Log(string.Format("Created the root page : {0}", page.Title));
+                foreach (ConfluencePage t in page.ChildPages)
                 {
-                    CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t, string.Empty)));
+                    CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t.Title, t.Content)));
                     logger.Log(string.Format("Created the child page : {0}", t));    
                 }
             }

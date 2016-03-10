@@ -48,6 +48,7 @@
     <Compile Include="AppSettingsHelper.cs" />
     <Compile Include="ChildPage.cs" />
     <Compile Include="ConfluencePageTreeTaskExecutor.cs" />
+    <Compile Include="ConstantContent.cs" />
     <Compile Include="IFormLogger.cs" />
     <Compile Include="Space.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
