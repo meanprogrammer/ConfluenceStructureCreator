@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceAutomator.Library
 {
-    public class Expandable
+    public class Expandable4
     {
         public string view { get; set; }
     }
@@ -14,22 +14,22 @@ namespace ConfluenceAutomator.Library
     public class Description2
     {
         public Plain plain { get; set; }
-        public Expandable _expandable { get; set; }
+        public Expandable4 _expandable { get; set; }
     }
 
-    public class Extensions
+    public class SpaceByTitleAndKeyResultResultExtensions
     {
         public string position { get; set; }
     }
 
-    public class Links
+    public class Links4
     {
         public string webui { get; set; }
         public string tinyui { get; set; }
         public string self { get; set; }
     }
 
-    public class Expandable2
+    public class SpaceByTitleAndKeyResultResultExpandable2
     {
         public string container { get; set; }
         public string metadata { get; set; }
@@ -49,12 +49,12 @@ namespace ConfluenceAutomator.Library
         public string type { get; set; }
         public string status { get; set; }
         public string title { get; set; }
-        public Extensions extensions { get; set; }
-        public Links _links { get; set; }
-        public Expandable2 _expandable { get; set; }
+        public SpaceByTitleAndKeyResultResultExtensions extensions { get; set; }
+        public Links4 _links { get; set; }
+        public SpaceByTitleAndKeyResultResultExpandable2 _expandable { get; set; }
     }
 
-    public class Links2
+    public class Links3
     {
         public string collection { get; set; }
         public string @base { get; set; }
@@ -62,7 +62,7 @@ namespace ConfluenceAutomator.Library
         public string self { get; set; }
     }
 
-    public class Expandable3
+    public class SpaceByTitleAndKeyResultResultExpandable3
     {
         public string icon { get; set; }
     }
@@ -75,8 +75,8 @@ namespace ConfluenceAutomator.Library
         public Description2 description { get; set; }
         public Homepage homepage { get; set; }
         public string type { get; set; }
-        public Links2 _links { get; set; }
-        public Expandable3 _expandable { get; set; }
+        public Links3 _links { get; set; }
+        public SpaceByTitleAndKeyResultResultExpandable3 _expandable { get; set; }
     }
 
 }

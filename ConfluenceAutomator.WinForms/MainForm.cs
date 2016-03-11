@@ -20,7 +20,11 @@ namespace ConfluenceAutomator.WinForms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            ConfluenceSpaceTaskExecutor spaces = new ConfluenceSpaceTaskExecutor();
+            List<Result> r = spaces.Execute(this);
+            this.ParentSpaceComboBox.ValueMember = "key";
+            this.ParentSpaceComboBox.DisplayMember = "name";
+            this.ParentSpaceComboBox.DataSource = r;
         }
 
         private void RunButton_Click(object sender, EventArgs e)
@@ -41,7 +45,7 @@ namespace ConfluenceAutomator.WinForms
             this.CancelButton.Enabled = false;
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
-            task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text);
+            task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString());
             this.RunButton.Enabled = true;
             this.CancelButton.Enabled = true;
         }
@@ -54,6 +58,11 @@ namespace ConfluenceAutomator.WinForms
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void LogTextbox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

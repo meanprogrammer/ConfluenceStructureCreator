@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ConfluenceAutomator.Library
 {
@@ -15,7 +17,7 @@ namespace ConfluenceAutomator.Library
         static string createSpaceUrl = AppSettingsHelper.GetValue("CreateSpaceUrl");
         static string createPageUrl = AppSettingsHelper.GetValue("CreatePageUrl");
 
-        public void Execute(IFormLogger logger, string name, string key, string description)
+        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey)
         {
             var list = StructureConstant.GetTaxonomy();
             logger.Log("Grabbing structure ...");
@@ -28,13 +30,64 @@ namespace ConfluenceAutomator.Library
                 foreach (ConfluencePage t in page.ChildPages)
                 {
                     CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t.Title, t.Content)));
-                    logger.Log(string.Format("Created the child page : {0}", t));    
+                    logger.Log(string.Format("Created the child page : {0}", t.Title));
                 }
             }
 
+            logger.Log("Updating parent Space.");
+
+            var parentPage = GetPageByKeyAndTitle(parentKey);
+            if (parentPage != null)
+            {
+                if (parentPage.results.Count() == 1)
+                {
+                    var r = parentPage.results.FirstOrDefault();
+                    string html = r.body.storage.value;
+                    int index = html.IndexOf("</ul>");
+                    string newHtml  = html.Insert(index - 1, "<li><a href=\"http://google.com\">Sample Only</></li>");
+                    Console.Write(newHtml);
+
+                    UpdatePageInput p = new UpdatePageInput();
+                    p.id = r.id;
+                    p.body.storage.value = newHtml;
+                    UpdateParentPage(r.id, p);
+                }
+            }
             logger.Log("Task Complete.");
         }
 
+        private static void UpdateParentPage(string pageId, UpdatePageInput param)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new System.Uri(string.Format("http://localhost:8080/confluence/rest/api/content/{0}", pageId));
+            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            string p = JsonConvert.SerializeObject(param);
+
+            System.Net.Http.HttpContent content = new StringContent(p, UTF8Encoding.UTF8, "application/json");
+            HttpResponseMessage messge = client.PostAsync(client.BaseAddress, content).Result;
+            string result = messge.Content.ReadAsStringAsync().Result;
+            //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
+        }
+
+        private static PageByTitleAndKeyResult GetPageByKeyAndTitle(string parentKey)
+        {
+            var pageTitle = AppSettingsHelper.GetValue("BusinessCaseTitle");
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("GetPageByTitleAndKeyUrl"), pageTitle, parentKey));
+            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
+            HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
+            string result = messge.Content.ReadAsStringAsync().Result;
+            PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
+            return obj;
+        }
 
         private static SpaceResult ExecuteNonCurl(string url, string payload)
         {

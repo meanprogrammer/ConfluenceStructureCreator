@@ -39,11 +39,15 @@
             this.RunButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.LogTextbox = new System.Windows.Forms.TextBox();
+            this.ParentSpaceComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.ParentSpaceComboBox);
             this.groupBox1.Controls.Add(this.DescriptionTextBox);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -53,7 +57,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(481, 211);
+            this.groupBox1.Size = new System.Drawing.Size(481, 258);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Space Information ";
@@ -115,7 +119,7 @@
             // 
             // RunButton
             // 
-            this.RunButton.Location = new System.Drawing.Point(313, 229);
+            this.RunButton.Location = new System.Drawing.Point(311, 276);
             this.RunButton.Name = "RunButton";
             this.RunButton.Size = new System.Drawing.Size(88, 40);
             this.RunButton.TabIndex = 1;
@@ -125,7 +129,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(407, 229);
+            this.CancelButton.Location = new System.Drawing.Point(405, 276);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(88, 40);
             this.CancelButton.TabIndex = 2;
@@ -136,12 +140,31 @@
             // LogTextbox
             // 
             this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
-            this.LogTextbox.Location = new System.Drawing.Point(19, 286);
+            this.LogTextbox.Location = new System.Drawing.Point(19, 397);
             this.LogTextbox.Multiline = true;
             this.LogTextbox.Name = "LogTextbox";
             this.LogTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LogTextbox.Size = new System.Drawing.Size(474, 286);
+            this.LogTextbox.Size = new System.Drawing.Size(474, 175);
             this.LogTextbox.TabIndex = 3;
+            this.LogTextbox.TextChanged += new System.EventHandler(this.LogTextbox_TextChanged);
+            // 
+            // ParentSpaceComboBox
+            // 
+            this.ParentSpaceComboBox.FormattingEnabled = true;
+            this.ParentSpaceComboBox.Location = new System.Drawing.Point(129, 198);
+            this.ParentSpaceComboBox.Name = "ParentSpaceComboBox";
+            this.ParentSpaceComboBox.Size = new System.Drawing.Size(325, 32);
+            this.ParentSpaceComboBox.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(22, 204);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Parent Space";
             // 
             // MainForm
             // 
@@ -178,6 +201,8 @@
         private System.Windows.Forms.Button RunButton;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.TextBox LogTextbox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox ParentSpaceComboBox;
     }
 }
 
