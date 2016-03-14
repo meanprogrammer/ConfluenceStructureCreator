@@ -122,7 +122,7 @@ namespace ConfluenceAutomator.Library
             a.ChildPages.Add(new ConfluencePage() { Title = "0.07 Business Scenarios", Content = string.Empty });
             a.ChildPages.Add(new ConfluencePage() { Title = "0.08 Solution Deployment Strategy", Content = string.Empty });
             list.Add(a);
-
+            /*
             var b = new ConfluencePage();
             b.Title = "1. Operations Analysis Phase";
             b.Content = ConstantContent.DISPLAY_CHILDREN_MARKUP;
@@ -218,7 +218,7 @@ namespace ConfluenceAutomator.Library
             g.ChildPages.Add(new ConfluencePage() { Title = "6.06 Stakeholder Matrix", Content = string.Empty });
             g.ChildPages.Add(new ConfluencePage() { Title = "6.07 Team Roster", Content = string.Empty });
             list.Add(g);
-
+            */
             return list;
         }
     }

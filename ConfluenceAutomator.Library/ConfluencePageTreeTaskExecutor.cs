@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -43,31 +44,47 @@ namespace ConfluenceAutomator.Library
                 {
                     var r = parentPage.results.FirstOrDefault();
                     string html = r.body.storage.value;
+                    html = html.Replace("\"", @"'");
+
                     int index = html.IndexOf("</ul>");
-                    string newHtml  = html.Insert(index - 1, "<li><a href=\"http://google.com\">Sample Only</></li>");
-                    Console.Write(newHtml);
+                    string newHtml = html.Insert(index, string.Format(@"<li><a href='{0}'>{1}</a></li>", BuildUrl(rootSpace), rootSpace.name));
 
                     UpdatePageInput p = new UpdatePageInput();
                     p.id = r.id;
                     p.body.storage.value = newHtml;
-                    UpdateParentPage(r.id, p);
+                    p.space.key = parentKey;
+                    p.title = r.title;
+                    p.version.number = r.version.number + 1;
+                    UpdateParentPage(p.id, p);
+                    logger.Log("Done updating the parent page.");
+                }
+                else
+                {
+                    logger.Log("Cannot find the parent page.");
                 }
             }
+            else
+            {
+                logger.Log("Cannot find the parent page.");
+            }
             logger.Log("Task Complete.");
+        }
+
+        private static string BuildUrl(SpaceResult root)
+        {
+            return string.Format("{0}/display/{1}", root._links.@base, root.key);
         }
 
         private static void UpdateParentPage(string pageId, UpdatePageInput param)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(string.Format("http://localhost:8080/confluence/rest/api/content/{0}", pageId));
+            client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("UpdatePageUrl"), pageId));
             byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            string p = JsonConvert.SerializeObject(param);
-
-            System.Net.Http.HttpContent content = new StringContent(p, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.PostAsync(client.BaseAddress, content).Result;
+            System.Net.Http.HttpContent content = new StringContent(ConvertToJson(param), UTF8Encoding.UTF8, "application/json");
+            HttpResponseMessage messge = client.PutAsync(client.BaseAddress, content).Result;
             string result = messge.Content.ReadAsStringAsync().Result;
             //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
         }

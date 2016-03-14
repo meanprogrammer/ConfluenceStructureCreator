@@ -6,6 +6,30 @@ using System.Threading.Tasks;
 
 namespace ConfluenceAutomator.Library
 {
+    public class PageByTitleAndKeyResultProfilePicture
+    {
+        public string path { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
+        public bool isDefault { get; set; }
+    }
+
+    public class PageByTitleAndKeyResultBy
+    {
+        public string type { get; set; }
+        public PageByTitleAndKeyResultProfilePicture profilePicture { get; set; }
+        public string username { get; set; }
+        public string displayName { get; set; }
+        public string userKey { get; set; }
+    }
+
+    public class PageByTitleAndKeyResultVersion
+    {
+        public PageByTitleAndKeyResultBy by { get; set; }
+        public string when { get; set; }
+        public int number { get; set; }
+        public bool minorEdit { get; set; }
+    }
 
     public class PageByTitleAndKeyResultExpandable
     {
@@ -53,7 +77,6 @@ namespace ConfluenceAutomator.Library
         public string children { get; set; }
         public string history { get; set; }
         public string ancestors { get; set; }
-        public string version { get; set; }
         public string descendants { get; set; }
         public string space { get; set; }
     }
@@ -64,6 +87,7 @@ namespace ConfluenceAutomator.Library
         public string type { get; set; }
         public string status { get; set; }
         public string title { get; set; }
+        public PageByTitleAndKeyResultVersion version { get; set; }
         public PageByTitleAndKeyResultBody body { get; set; }
         public PageByTitleAndKeyResultExtensions extensions { get; set; }
         public PageByTitleAndKeyResultLinks _links { get; set; }
@@ -85,5 +109,7 @@ namespace ConfluenceAutomator.Library
         public int size { get; set; }
         public PageByTitleAndKeyResultLinks2 _links { get; set; }
     }
+
+
 
 }

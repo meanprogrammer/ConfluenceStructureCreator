@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ParentSpaceComboBox = new System.Windows.Forms.ComboBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,8 +41,6 @@
             this.RunButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.LogTextbox = new System.Windows.Forms.TextBox();
-            this.ParentSpaceComboBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +61,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Space Information ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(22, 204);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Parent Space";
+            // 
+            // ParentSpaceComboBox
+            // 
+            this.ParentSpaceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ParentSpaceComboBox.FormattingEnabled = true;
+            this.ParentSpaceComboBox.Location = new System.Drawing.Point(129, 198);
+            this.ParentSpaceComboBox.Name = "ParentSpaceComboBox";
+            this.ParentSpaceComboBox.Size = new System.Drawing.Size(325, 32);
+            this.ParentSpaceComboBox.TabIndex = 6;
             // 
             // DescriptionTextBox
             // 
@@ -140,31 +159,13 @@
             // LogTextbox
             // 
             this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
-            this.LogTextbox.Location = new System.Drawing.Point(19, 397);
+            this.LogTextbox.Location = new System.Drawing.Point(19, 322);
             this.LogTextbox.Multiline = true;
             this.LogTextbox.Name = "LogTextbox";
             this.LogTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LogTextbox.Size = new System.Drawing.Size(474, 175);
+            this.LogTextbox.Size = new System.Drawing.Size(474, 250);
             this.LogTextbox.TabIndex = 3;
             this.LogTextbox.TextChanged += new System.EventHandler(this.LogTextbox_TextChanged);
-            // 
-            // ParentSpaceComboBox
-            // 
-            this.ParentSpaceComboBox.FormattingEnabled = true;
-            this.ParentSpaceComboBox.Location = new System.Drawing.Point(129, 198);
-            this.ParentSpaceComboBox.Name = "ParentSpaceComboBox";
-            this.ParentSpaceComboBox.Size = new System.Drawing.Size(325, 32);
-            this.ParentSpaceComboBox.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(22, 204);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Parent Space";
             // 
             // MainForm
             // 
