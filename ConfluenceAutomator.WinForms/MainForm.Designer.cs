@@ -114,6 +114,7 @@
             // 
             this.KeyTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyTextbox.Location = new System.Drawing.Point(129, 73);
+            this.KeyTextbox.MaxLength = 3;
             this.KeyTextbox.Name = "KeyTextbox";
             this.KeyTextbox.Size = new System.Drawing.Size(325, 29);
             this.KeyTextbox.TabIndex = 2;

@@ -37,17 +37,19 @@ namespace ConfluenceAutomator.Library
 
             logger.Log("Updating parent Space.");
 
-            var parentPage = GetPageByKeyAndTitle(parentKey);
-            if (parentPage != null)
+            var parentBusinessCase = GetPageByKeyAndTitle(parentKey, "ParentBusinessCaseTitle");
+            if (parentBusinessCase != null)
             {
-                if (parentPage.results.Count() == 1)
+                if (parentBusinessCase.results.Count() == 1)
                 {
-                    var r = parentPage.results.FirstOrDefault();
+                    var r = parentBusinessCase.results.FirstOrDefault();
                     string html = r.body.storage.value;
                     html = html.Replace("\"", @"'");
 
                     int index = html.IndexOf("</ul>");
-                    string newHtml = html.Insert(index, string.Format(@"<li><a href='{0}'>{1}</a></li>", BuildUrl(rootSpace), rootSpace.name));
+
+                    var childBusinessCase = GetPageByKeyAndTitle(rootSpace.key, "ProjectBusinessCaseTitle");
+                    string newHtml = html.Insert(index, string.Format(@"<li><a href='{0}'>{1}</a></li>", ExtractLinkFromChildBusinessCase(childBusinessCase), rootSpace.name));
 
                     UpdatePageInput p = new UpdatePageInput();
                     p.id = r.id;
@@ -56,7 +58,26 @@ namespace ConfluenceAutomator.Library
                     p.title = r.title;
                     p.version.number = r.version.number + 1;
                     UpdateParentPage(p.id, p);
-                    logger.Log("Done updating the parent page.");
+                    logger.Log("Done updating the project parent page.");
+
+                    var pipelineBusinessCase = GetPageByKeyAndTitle(parentKey, "PipelineBusinessCaseTitle");
+
+                    var pbc = pipelineBusinessCase.results.FirstOrDefault();
+                    string pipelineHtml = pbc.body.storage.value;
+                    pipelineHtml = pipelineHtml.Replace("\"", @"'");
+
+                    int idx = pipelineHtml.IndexOf("</ul>");
+
+                    newHtml = pipelineHtml.Insert(idx, string.Format(@"<li><a href='{0}'>{1}</a></li>", ExtractLinkFromChildBusinessCase(childBusinessCase), rootSpace.name));
+
+                    UpdatePageInput p2 = new UpdatePageInput();
+                    p2.id = pbc.id;
+                    p2.body.storage.value = newHtml;
+                    p2.space.key = parentKey;
+                    p2.title = pbc.title;
+                    p2.version.number = pbc.version.number + 1;
+                    UpdateParentPage(p2.id, p2);
+                    logger.Log("Done updating the pipeline parent page.");
                 }
                 else
                 {
@@ -75,6 +96,17 @@ namespace ConfluenceAutomator.Library
             return string.Format("{0}/display/{1}", root._links.@base, root.key);
         }
 
+        private static string ExtractLinkFromChildBusinessCase(PageByTitleAndKeyResult result)
+        {
+            string link = string.Empty;
+            if (result != null && result.results.Count > 0)
+            {
+                var page = result.results.FirstOrDefault();
+                link = page._links.webui;
+            }
+            return link;
+        }
+
         private static void UpdateParentPage(string pageId, UpdatePageInput param)
         {
             HttpClient client = new HttpClient();
@@ -89,9 +121,9 @@ namespace ConfluenceAutomator.Library
             //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
         }
 
-        private static PageByTitleAndKeyResult GetPageByKeyAndTitle(string parentKey)
+        private static PageByTitleAndKeyResult GetPageByKeyAndTitle(string parentKey, string appSettingsKey)
         {
-            var pageTitle = AppSettingsHelper.GetValue("BusinessCaseTitle");
+            var pageTitle = AppSettingsHelper.GetValue(appSettingsKey);
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("GetPageByTitleAndKeyUrl"), pageTitle, parentKey));
