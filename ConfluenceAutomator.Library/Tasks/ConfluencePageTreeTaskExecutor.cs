@@ -91,12 +91,32 @@ namespace ConfluenceAutomator.Library
                 }
                 else
                 {
-                    logger.Log("Cannot find the parent page.");
+                    logger.Log("Cannot find the Business Case Parent Page.");
                 }
             }
             else
             {
                 logger.Log("Cannot find the parent page.");
+            }
+
+
+            var parentFunctionalRequirements = GetPageByKeyAndTitle(parentKey, "ParentFunctionalRequirementTitle");
+            if (parentFunctionalRequirements != null)
+            {
+                if (parentFunctionalRequirements.results.Count == 1)
+                {
+                    var funcPage = parentFunctionalRequirements.results.FirstOrDefault();
+                    if (funcPage != null)
+                    {
+                        CreateChildPage(createPageUrl, JsonConvert.SerializeObject(CreateChildPageInstance(parentKey, funcPage.id, rootSpace.name,
+                            string.Format(AppSettingsHelper.GetValue("includePageContent"), "1.01 Functional Requirements", rootSpace.key)
+                            )));
+                    }
+                }
+                else
+                {
+                    logger.Log("Cannot find Functional Requirement Parent Page.");
+                }
             }
             logger.Log("Task Complete.");
         }
