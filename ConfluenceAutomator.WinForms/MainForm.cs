@@ -25,6 +25,8 @@ namespace ConfluenceAutomator.WinForms
             this.ParentSpaceComboBox.ValueMember = "key";
             this.ParentSpaceComboBox.DisplayMember = "name";
             this.ParentSpaceComboBox.DataSource = r;
+
+            ParentSpaceComboBox_SelectedIndexChanged(sender, e);
         }
 
         private void RunButton_Click(object sender, EventArgs e)
@@ -45,7 +47,10 @@ namespace ConfluenceAutomator.WinForms
             this.CancelButton.Enabled = false;
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
-            task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString());
+
+            ChildPageResultResult bc = this.PipelineBCcomboBox.SelectedItem as ChildPageResultResult;
+
+            task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString(), bc.title);
             this.RunButton.Enabled = true;
             this.CancelButton.Enabled = true;
         }
@@ -60,9 +65,29 @@ namespace ConfluenceAutomator.WinForms
             this.Close();
         }
 
-        private void LogTextbox_TextChanged(object sender, EventArgs e)
+        private void ParentSpaceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var defaultSelected = this.ParentSpaceComboBox.SelectedItem as Result;
+            if (defaultSelected != null)
+            {
+                PageByTitleAndKeyResult page = ConfluencePageTreeTaskExecutor.GetPageByKeyAndTitle(defaultSelected.key, "PipelineBusinessCaseTitle");
+                if (page != null && page.results.Count == 1)
+                {
+                    ConfluenceChildPagesTaskExecutor bcChildren = new ConfluenceChildPagesTaskExecutor();
+                    List<ChildPageResultResult> rs = bcChildren.Execute(this, page.results.FirstOrDefault().id);
 
+                    if (rs.Count < 1)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        this.PipelineBCcomboBox.ValueMember = "id";
+                        this.PipelineBCcomboBox.DisplayMember = "title";
+                        this.PipelineBCcomboBox.DataSource = rs;
+                    }
+                }
+            }
         }
     }
 }

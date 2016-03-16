@@ -18,9 +18,37 @@ namespace ConfluenceAutomator.Library
         static string createSpaceUrl = AppSettingsHelper.GetValue("CreateSpaceUrl");
         static string createPageUrl = AppSettingsHelper.GetValue("CreatePageUrl");
 
-        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey)
+        private List<ConfluencePage> AlterWithNewContent(List<ConfluencePage> list, string key, string newContent)
+        {
+            var result = list;
+            foreach (ConfluencePage c in list)
+            {
+                if (c.Title == key)
+                {
+                    c.Content = newContent;
+                    return list;
+                }
+                if (c.ChildPages.Count > 0)
+                {
+                    result = AlterWithNewContent(c.ChildPages, key, newContent);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            return result;
+        }
+
+
+        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey, string bcTitle)
         {
             var list = StructureConstant.GetTaxonomy();
+
+            var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), bcTitle, parentKey);
+
+            AlterWithNewContent(list, AppSettingsHelper.GetValue("ProjectBusinessCaseTitle"), newContent);
+
             logger.Log("Grabbing structure ...");
             var rootSpace = ExecuteNonCurl(createSpaceUrl, ConvertToJson(CreateSpaceInstance(name, key, description)));
             logger.Log("Created Root Space ...");
@@ -60,6 +88,9 @@ namespace ConfluenceAutomator.Library
                     UpdateParentPage(p.id, p);
                     logger.Log("Done updating the project parent page.");
 
+
+
+                    /*
                     var pipelineBusinessCase = GetPageByKeyAndTitle(parentKey, "PipelineBusinessCaseTitle");
 
                     var pbc = pipelineBusinessCase.results.FirstOrDefault();
@@ -78,6 +109,8 @@ namespace ConfluenceAutomator.Library
                     p2.version.number = pbc.version.number + 1;
                     UpdateParentPage(p2.id, p2);
                     logger.Log("Done updating the pipeline parent page.");
+                     * 
+                    */
                 }
                 else
                 {
@@ -121,7 +154,7 @@ namespace ConfluenceAutomator.Library
             //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
         }
 
-        private static PageByTitleAndKeyResult GetPageByKeyAndTitle(string parentKey, string appSettingsKey)
+        public static PageByTitleAndKeyResult GetPageByKeyAndTitle(string parentKey, string appSettingsKey)
         {
             var pageTitle = AppSettingsHelper.GetValue(appSettingsKey);
 

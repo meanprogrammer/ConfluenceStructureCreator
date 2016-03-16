@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.PipelineBCcomboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.ParentSpaceComboBox = new System.Windows.Forms.ComboBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
@@ -46,6 +48,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.PipelineBCcomboBox);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.ParentSpaceComboBox);
             this.groupBox1.Controls.Add(this.DescriptionTextBox);
@@ -55,12 +59,31 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.NameTextBox);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(8, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(481, 258);
+            this.groupBox1.Size = new System.Drawing.Size(485, 476);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Space Information ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(22, 240);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "BC Page";
+            // 
+            // PipelineBCcomboBox
+            // 
+            this.PipelineBCcomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PipelineBCcomboBox.FormattingEnabled = true;
+            this.PipelineBCcomboBox.Location = new System.Drawing.Point(129, 236);
+            this.PipelineBCcomboBox.Name = "PipelineBCcomboBox";
+            this.PipelineBCcomboBox.Size = new System.Drawing.Size(325, 32);
+            this.PipelineBCcomboBox.TabIndex = 8;
             // 
             // label4
             // 
@@ -80,6 +103,7 @@
             this.ParentSpaceComboBox.Name = "ParentSpaceComboBox";
             this.ParentSpaceComboBox.Size = new System.Drawing.Size(325, 32);
             this.ParentSpaceComboBox.TabIndex = 6;
+            this.ParentSpaceComboBox.SelectedIndexChanged += new System.EventHandler(this.ParentSpaceComboBox_SelectedIndexChanged);
             // 
             // DescriptionTextBox
             // 
@@ -139,7 +163,7 @@
             // 
             // RunButton
             // 
-            this.RunButton.Location = new System.Drawing.Point(311, 276);
+            this.RunButton.Location = new System.Drawing.Point(313, 484);
             this.RunButton.Name = "RunButton";
             this.RunButton.Size = new System.Drawing.Size(88, 40);
             this.RunButton.TabIndex = 1;
@@ -149,7 +173,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(405, 276);
+            this.CancelButton.Location = new System.Drawing.Point(407, 484);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(88, 40);
             this.CancelButton.TabIndex = 2;
@@ -160,19 +184,18 @@
             // LogTextbox
             // 
             this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
-            this.LogTextbox.Location = new System.Drawing.Point(19, 322);
+            this.LogTextbox.Location = new System.Drawing.Point(499, 12);
             this.LogTextbox.Multiline = true;
             this.LogTextbox.Name = "LogTextbox";
             this.LogTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.LogTextbox.Size = new System.Drawing.Size(474, 250);
             this.LogTextbox.TabIndex = 3;
-            this.LogTextbox.TextChanged += new System.EventHandler(this.LogTextbox_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 584);
+            this.ClientSize = new System.Drawing.Size(985, 532);
             this.Controls.Add(this.LogTextbox);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.RunButton);
@@ -205,6 +228,8 @@
         private System.Windows.Forms.TextBox LogTextbox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox ParentSpaceComboBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox PipelineBCcomboBox;
     }
 }
 
