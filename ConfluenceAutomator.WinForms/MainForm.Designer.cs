@@ -43,11 +43,13 @@
             this.RunButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.LogTextbox = new System.Windows.Forms.TextBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.treeView1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.PipelineBCcomboBox);
             this.groupBox1.Controls.Add(this.label4);
@@ -191,6 +193,14 @@
             this.LogTextbox.Size = new System.Drawing.Size(474, 250);
             this.LogTextbox.TabIndex = 3;
             // 
+            // treeView1
+            // 
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Location = new System.Drawing.Point(26, 284);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(453, 186);
+            this.treeView1.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,6 +240,7 @@
         private System.Windows.Forms.ComboBox ParentSpaceComboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox PipelineBCcomboBox;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

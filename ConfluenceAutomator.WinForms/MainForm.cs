@@ -20,6 +20,7 @@ namespace ConfluenceAutomator.WinForms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            
             ConfluenceSpaceTaskExecutor spaces = new ConfluenceSpaceTaskExecutor();
             List<Result> r = spaces.Execute(this);
             this.ParentSpaceComboBox.ValueMember = "key";
@@ -27,6 +28,14 @@ namespace ConfluenceAutomator.WinForms
             this.ParentSpaceComboBox.DataSource = r;
 
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
+            
+            /*
+            TreeNode mainNode = new TreeNode();
+            mainNode.Text = "Topmost Node";
+            mainNode.Nodes.Add("Node1", "1");
+
+            this.treeView1.Nodes.Add(mainNode);
+            */
         }
 
         private void RunButton_Click(object sender, EventArgs e)
