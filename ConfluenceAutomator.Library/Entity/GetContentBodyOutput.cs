@@ -11,14 +11,14 @@ namespace ConfluenceAutomator.Library
         public string content { get; set; }
     }
 
-    public class Storage
+    public class GetContentBodyOutput_Storage
     {
         public string value { get; set; }
         public string representation { get; set; }
         public GetContentBodyResultExpandable _expandable { get; set; }
     }
 
-    public class Expandable2
+    public class GetContentBodyOutput_Expandable2
     {
         public string editor { get; set; }
         public string view { get; set; }
@@ -26,18 +26,18 @@ namespace ConfluenceAutomator.Library
         public string anonymous_export_view { get; set; }
     }
 
-    public class Body
+    public class GetContentBodyOutput_Body
     {
-        public Storage storage { get; set; }
-        public Expandable2 _expandable { get; set; }
+        public GetContentBodyOutput_Storage storage { get; set; }
+        public GetContentBodyOutput_Expandable2 _expandable { get; set; }
     }
 
-    public class Extensions
+    public class GetContentBodyOutput_Extensions
     {
         public string position { get; set; }
     }
 
-    public class GetContentBodyResultLinks
+    public class GetContentBodyOutput_Links
     {
         public string webui { get; set; }
         public string tinyui { get; set; }
@@ -47,7 +47,7 @@ namespace ConfluenceAutomator.Library
         public string self { get; set; }
     }
 
-    public class Expandable3
+    public class GetContentBodyOutput_Expandable3
     {
         public string container { get; set; }
         public string metadata { get; set; }
@@ -60,15 +60,15 @@ namespace ConfluenceAutomator.Library
         public string space { get; set; }
     }
 
-    public class GetContentBodyResult
+    public class GetContentBodyOutput
     {
         public string id { get; set; }
         public string type { get; set; }
         public string status { get; set; }
         public string title { get; set; }
-        public Body body { get; set; }
-        public Extensions extensions { get; set; }
-        public GetContentBodyResultLinks _links { get; set; }
-        public Expandable3 _expandable { get; set; }
+        public GetContentBodyOutput_Body body { get; set; }
+        public GetContentBodyOutput_Extensions extensions { get; set; }
+        public GetContentBodyOutput_Links _links { get; set; }
+        public GetContentBodyOutput_Expandable3 _expandable { get; set; }
     }
 }

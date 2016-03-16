@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace ConfluenceAutomator.Library
 {
-    public class ChildPageResultExtensions
+    public class ChildPagesOutput_Extensions
     {
         public string position { get; set; }
     }
 
-    public class ChildPageResultLinks
+    public class ChildPagesOutput_Links
     {
         public string webui { get; set; }
         public string tinyui { get; set; }
         public string self { get; set; }
     }
 
-    public class ChildPageResultExpandable
+    public class ChildPagesOutput_Expandable
     {
         public string container { get; set; }
         public string metadata { get; set; }
@@ -32,30 +32,30 @@ namespace ConfluenceAutomator.Library
         public string space { get; set; }
     }
 
-    public class ChildPageResultResult
+    public class ChildPagesOutput_Result
     {
         public string id { get; set; }
         public string type { get; set; }
         public string status { get; set; }
         public string title { get; set; }
-        public ChildPageResultExtensions extensions { get; set; }
-        public ChildPageResultLinks _links { get; set; }
-        public ChildPageResultExpandable _expandable { get; set; }
+        public ChildPagesOutput_Extensions extensions { get; set; }
+        public ChildPagesOutput_Links _links { get; set; }
+        public ChildPagesOutput_Expandable _expandable { get; set; }
     }
 
-    public class ChildPageResultLinks2
+    public class ChildPagesOutput_Links2
     {
         public string self { get; set; }
         public string @base { get; set; }
         public string context { get; set; }
     }
 
-    public class ChildPageResult
+    public class ChildPagesOutput
     {
-        public List<ChildPageResultResult> results { get; set; }
+        public List<ChildPagesOutput_Result> results { get; set; }
         public int start { get; set; }
         public int limit { get; set; }
         public int size { get; set; }
-        public ChildPageResultLinks2 _links { get; set; }
+        public ChildPagesOutput_Links2 _links { get; set; }
     }
 }

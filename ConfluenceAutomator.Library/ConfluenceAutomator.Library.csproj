@@ -52,18 +52,18 @@
   <ItemGroup>
     <Compile Include="Entity\AllSpaces.cs" />
     <Compile Include="Helper\AppSettingsHelper.cs" />
-    <Compile Include="Entity\ChildPage.cs" />
-    <Compile Include="Entity\ChildPageResult.cs" />
+    <Compile Include="Entity\ChildPageInput.cs" />
+    <Compile Include="Entity\ChildPagesOutput.cs" />
     <Compile Include="Tasks\ConfluenceChildPagesTaskExecutor.cs" />
     <Compile Include="Tasks\ConfluencePageTreeTaskExecutor.cs" />
     <Compile Include="Tasks\ConfluenceSpaceTaskExecutor.cs" />
     <Compile Include="Entity\ConstantContent.cs" />
-    <Compile Include="Entity\GetContentBodyResult.cs" />
+    <Compile Include="Entity\GetContentBodyOutput.cs" />
     <Compile Include="IFormLogger.cs" />
-    <Compile Include="Entity\Space.cs" />
+    <Compile Include="Entity\SpaceInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entity\PageByTitleAndKeyResult.cs" />
-    <Compile Include="Entity\SpaceResult.cs" />
+    <Compile Include="Entity\PageByTitleAndKeyOutput.cs" />
+    <Compile Include="Entity\SpaceOutput.cs" />
     <Compile Include="Entity\StructureConstant.cs" />
     <Compile Include="Entity\UpdatePageInput.cs" />
   </ItemGroup>

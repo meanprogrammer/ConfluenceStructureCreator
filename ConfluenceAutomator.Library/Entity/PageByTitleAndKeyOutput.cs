@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceAutomator.Library
 {
-    public class PageByTitleAndKeyResultProfilePicture
+    public class PageByTitleAndKeyOutput_ProfilePicture
     {
         public string path { get; set; }
         public int width { get; set; }
@@ -14,36 +14,36 @@ namespace ConfluenceAutomator.Library
         public bool isDefault { get; set; }
     }
 
-    public class PageByTitleAndKeyResultBy
+    public class PageByTitleAndKeyOutput_By
     {
         public string type { get; set; }
-        public PageByTitleAndKeyResultProfilePicture profilePicture { get; set; }
+        public PageByTitleAndKeyOutput_ProfilePicture profilePicture { get; set; }
         public string username { get; set; }
         public string displayName { get; set; }
         public string userKey { get; set; }
     }
 
-    public class PageByTitleAndKeyResultVersion
+    public class PageByTitleAndKeyOutput_Version
     {
-        public PageByTitleAndKeyResultBy by { get; set; }
+        public PageByTitleAndKeyOutput_By by { get; set; }
         public string when { get; set; }
         public int number { get; set; }
         public bool minorEdit { get; set; }
     }
 
-    public class PageByTitleAndKeyResultExpandable
+    public class PageByTitleAndKeyOutput_Expandable
     {
         public string content { get; set; }
     }
 
-    public class PageByTitleAndKeyResultStorage
+    public class PageByTitleAndKeyOutput_Storage
     {
         public string value { get; set; }
         public string representation { get; set; }
-        public PageByTitleAndKeyResultExpandable _expandable { get; set; }
+        public PageByTitleAndKeyOutput_Expandable _expandable { get; set; }
     }
 
-    public class PageByTitleAndKeyResultExpandable2
+    public class PageByTitleAndKeyOutput_Expandable2
     {
         public string editor { get; set; }
         public string view { get; set; }
@@ -51,25 +51,25 @@ namespace ConfluenceAutomator.Library
         public string anonymous_export_view { get; set; }
     }
 
-    public class PageByTitleAndKeyResultBody
+    public class PageByTitleAndKeyOutput_Body
     {
-        public PageByTitleAndKeyResultStorage storage { get; set; }
-        public PageByTitleAndKeyResultExpandable2 _expandable { get; set; }
+        public PageByTitleAndKeyOutput_Storage storage { get; set; }
+        public PageByTitleAndKeyOutput_Expandable2 _expandable { get; set; }
     }
 
-    public class PageByTitleAndKeyResultExtensions
+    public class PageByTitleAndKeyOutput_Extensions
     {
         public string position { get; set; }
     }
 
-    public class PageByTitleAndKeyResultLinks
+    public class PageByTitleAndKeyOutput_Links
     {
         public string webui { get; set; }
         public string tinyui { get; set; }
         public string self { get; set; }
     }
 
-    public class PageByTitleAndKeyResultExpandable3
+    public class PageByTitleAndKeyOutput_Expandable3
     {
         public string container { get; set; }
         public string metadata { get; set; }
@@ -81,33 +81,33 @@ namespace ConfluenceAutomator.Library
         public string space { get; set; }
     }
 
-    public class PageByTitleAndKeyResultResult
+    public class PageByTitleAndKeyOutput_Result
     {
         public string id { get; set; }
         public string type { get; set; }
         public string status { get; set; }
         public string title { get; set; }
-        public PageByTitleAndKeyResultVersion version { get; set; }
-        public PageByTitleAndKeyResultBody body { get; set; }
-        public PageByTitleAndKeyResultExtensions extensions { get; set; }
-        public PageByTitleAndKeyResultLinks _links { get; set; }
-        public PageByTitleAndKeyResultExpandable3 _expandable { get; set; }
+        public PageByTitleAndKeyOutput_Version version { get; set; }
+        public PageByTitleAndKeyOutput_Body body { get; set; }
+        public PageByTitleAndKeyOutput_Extensions extensions { get; set; }
+        public PageByTitleAndKeyOutput_Links _links { get; set; }
+        public PageByTitleAndKeyOutput_Expandable3 _expandable { get; set; }
     }
 
-    public class PageByTitleAndKeyResultLinks2
+    public class PageByTitleAndKeyOutput_Links2
     {
         public string self { get; set; }
         public string @base { get; set; }
         public string context { get; set; }
     }
 
-    public class PageByTitleAndKeyResult
+    public class PageByTitleAndKeyOutput
     {
-        public List<PageByTitleAndKeyResultResult> results { get; set; }
+        public List<PageByTitleAndKeyOutput_Result> results { get; set; }
         public int start { get; set; }
         public int limit { get; set; }
         public int size { get; set; }
-        public PageByTitleAndKeyResultLinks2 _links { get; set; }
+        public PageByTitleAndKeyOutput_Links2 _links { get; set; }
     }
 
 

@@ -8,23 +8,23 @@ namespace ConfluenceAutomator.Library
 {
 
 
-    public class UpdatePageInputSpace
+    public class UpdatePageInput_Space
     {
         public string key { get; set; }
     }
 
-    public class UpdatePageInputStorage
+    public class UpdatePageInput_Storage
     {
         public string value { get; set; }
         public string representation { get; set; }
     }
 
-    public class UpdatePageInputBody
+    public class UpdatePageInput_Body
     {
-        public UpdatePageInputStorage storage { get; set; }
+        public UpdatePageInput_Storage storage { get; set; }
     }
 
-    public class UpdatePageInputVersion
+    public class UpdatePageInput_Version
     {
         public int number { get; set; }
     }
@@ -33,19 +33,19 @@ namespace ConfluenceAutomator.Library
     {
         public UpdatePageInput()
         {
-            space = new UpdatePageInputSpace();
-            body = new UpdatePageInputBody();
-            body.storage = new UpdatePageInputStorage();
+            space = new UpdatePageInput_Space();
+            body = new UpdatePageInput_Body();
+            body.storage = new UpdatePageInput_Storage();
             body.storage.representation = "storage";
-            version = new UpdatePageInputVersion();
+            version = new UpdatePageInput_Version();
             type = "page";
         }
 
         public string id { get; set; }
         public string type { get; set; }
         public string title { get; set; }
-        public UpdatePageInputSpace space { get; set; }
-        public UpdatePageInputBody body { get; set; }
-        public UpdatePageInputVersion version { get; set; }
+        public UpdatePageInput_Space space { get; set; }
+        public UpdatePageInput_Body body { get; set; }
+        public UpdatePageInput_Version version { get; set; }
     }
 }

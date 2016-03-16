@@ -48,7 +48,7 @@ namespace ConfluenceAutomator.WinForms
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
 
-            ChildPageResultResult bc = this.PipelineBCcomboBox.SelectedItem as ChildPageResultResult;
+            ChildPagesOutput_Result bc = this.PipelineBCcomboBox.SelectedItem as ChildPagesOutput_Result;
 
             task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString(), bc.title);
             this.RunButton.Enabled = true;
@@ -70,11 +70,11 @@ namespace ConfluenceAutomator.WinForms
             var defaultSelected = this.ParentSpaceComboBox.SelectedItem as Result;
             if (defaultSelected != null)
             {
-                PageByTitleAndKeyResult page = ConfluencePageTreeTaskExecutor.GetPageByKeyAndTitle(defaultSelected.key, "PipelineBusinessCaseTitle");
+                PageByTitleAndKeyOutput page = ConfluencePageTreeTaskExecutor.GetPageByKeyAndTitle(defaultSelected.key, "PipelineBusinessCaseTitle");
                 if (page != null && page.results.Count == 1)
                 {
                     ConfluenceChildPagesTaskExecutor bcChildren = new ConfluenceChildPagesTaskExecutor();
-                    List<ChildPageResultResult> rs = bcChildren.Execute(this, page.results.FirstOrDefault().id);
+                    List<ChildPagesOutput_Result> rs = bcChildren.Execute(this, page.results.FirstOrDefault().id);
 
                     if (rs.Count < 1)
                     {

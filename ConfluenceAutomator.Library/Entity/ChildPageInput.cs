@@ -7,34 +7,34 @@ using System.Threading.Tasks;
 namespace ConfluenceAutomator.Library
 {
 
-    public class ChildPageAncestor
+    public class ChildPage_Ancestor
         {
             public int id { get; set; }
         }
 
-    public class ChildPageSpace
+    public class ChildPage_Space
         {
             public string key { get; set; }
         }
 
-    public class ChildPageStorage
+    public class ChildPage_Storage
         {
             public string value { get; set; }
             public string representation { get; set; }
         }
 
-    public class ChildPageBody
+    public class ChildPage_Body
         {
-        public ChildPageStorage storage { get; set; }
+        public ChildPage_Storage storage { get; set; }
         }
 
-        public class ChildPage
+        public class ChildPageInput
         {
             public string type { get; set; }
             public string title { get; set; }
-            public List<ChildPageAncestor> ancestors { get; set; }
-            public ChildPageSpace space { get; set; }
-            public ChildPageBody body { get; set; }
+            public List<ChildPage_Ancestor> ancestors { get; set; }
+            public ChildPage_Space space { get; set; }
+            public ChildPage_Body body { get; set; }
         }
     
 }

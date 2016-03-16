@@ -11,7 +11,7 @@ namespace ConfluenceAutomator.Library
     public class ConfluenceChildPagesTaskExecutor
     {
         static string credentials = string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
-        public List<ChildPageResultResult> Execute(IFormLogger logger, string id)
+        public List<ChildPagesOutput_Result> Execute(IFormLogger logger, string id)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("GetChildPagesUrl"), id));
@@ -22,7 +22,7 @@ namespace ConfluenceAutomator.Library
             System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
             HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
             string result = messge.Content.ReadAsStringAsync().Result;
-            ChildPageResult obj = JsonConvert.DeserializeObject<ChildPageResult>(result);
+            ChildPagesOutput obj = JsonConvert.DeserializeObject<ChildPagesOutput>(result);
             return obj.results;
         }
     }

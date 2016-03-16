@@ -11,9 +11,9 @@ namespace ConfluenceAutomator.Library
         public string view { get; set; }
     }
 
-    public class Description2
+    public class SpaceOutput_Description2
     {
-        public Plain plain { get; set; }
+        public SpaceInput_Plain plain { get; set; }
         public Expandable4 _expandable { get; set; }
     }
 
@@ -43,7 +43,7 @@ namespace ConfluenceAutomator.Library
         public string space { get; set; }
     }
 
-    public class Homepage
+    public class SpaceOutput_Homepage
     {
         public string id { get; set; }
         public string type { get; set; }
@@ -54,7 +54,7 @@ namespace ConfluenceAutomator.Library
         public SpaceByTitleAndKeyResultResultExpandable2 _expandable { get; set; }
     }
 
-    public class Links3
+    public class SpaceOutput_Links3
     {
         public string collection { get; set; }
         public string @base { get; set; }
@@ -67,15 +67,15 @@ namespace ConfluenceAutomator.Library
         public string icon { get; set; }
     }
 
-    public class SpaceResult
+    public class SpaceOutput
     {
         public int id { get; set; }
         public string key { get; set; }
         public string name { get; set; }
-        public Description2 description { get; set; }
-        public Homepage homepage { get; set; }
+        public SpaceOutput_Description2 description { get; set; }
+        public SpaceOutput_Homepage homepage { get; set; }
         public string type { get; set; }
-        public Links3 _links { get; set; }
+        public SpaceOutput_Links3 _links { get; set; }
         public SpaceByTitleAndKeyResultResultExpandable3 _expandable { get; set; }
     }
 

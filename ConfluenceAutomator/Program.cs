@@ -38,7 +38,7 @@ namespace ConfluenceAutomator
             Console.ReadLine();
         }
 
-        private static SpaceResult ExecuteNonCurl(string url, string payload)
+        private static SpaceOutput ExecuteNonCurl(string url, string payload)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(url);
@@ -49,11 +49,11 @@ namespace ConfluenceAutomator
             System.Net.Http.HttpContent content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
             HttpResponseMessage messge = client.PostAsync(url, content).Result;
             string result = messge.Content.ReadAsStringAsync().Result;
-            SpaceResult obj = JsonConvert.DeserializeObject<SpaceResult>(result);
+            SpaceOutput obj = JsonConvert.DeserializeObject<SpaceOutput>(result);
             return obj;
         }
 
-        private static SpaceResult CreateChildPage(string url, string payload) 
+        private static SpaceOutput CreateChildPage(string url, string payload) 
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(url);
@@ -64,24 +64,24 @@ namespace ConfluenceAutomator
             System.Net.Http.HttpContent content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
             HttpResponseMessage messge = client.PostAsync(url, content).Result;
             string result = messge.Content.ReadAsStringAsync().Result;
-            SpaceResult obj = JsonConvert.DeserializeObject<SpaceResult>(result);
+            SpaceOutput obj = JsonConvert.DeserializeObject<SpaceOutput>(result);
             return obj;
         }
 
-        private static ChildPage CreateChildPageInstance(string key, string rootId, string title)
+        private static ChildPageInput CreateChildPageInstance(string key, string rootId, string title)
         {
-            ChildPage cp = new ChildPage();
-            cp.ancestors = new List<ChildPageAncestor>();
-            cp.ancestors.Add(new ChildPageAncestor(){  id=int.Parse(rootId) });
+            ChildPageInput cp = new ChildPageInput();
+            cp.ancestors = new List<ChildPage_Ancestor>();
+            cp.ancestors.Add(new ChildPage_Ancestor(){  id=int.Parse(rootId) });
             cp.title = title;
             cp.type = "page";
-            cp.space = new ChildPageSpace() { key = key };
-            cp.body = new ChildPageBody() { storage = new ChildPageStorage() { representation = "storage", value = "<p>The page content goes here.</p>" } };
+            cp.space = new ChildPage_Space() { key = key };
+            cp.body = new ChildPage_Body() { storage = new ChildPage_Storage() { representation = "storage", value = "<p>The page content goes here.</p>" } };
 
             return cp;
         }
 
-        private static string ConvertToJson(ChildPage cp)
+        private static string ConvertToJson(ChildPageInput cp)
         {
             return JsonConvert.SerializeObject(cp);
         }

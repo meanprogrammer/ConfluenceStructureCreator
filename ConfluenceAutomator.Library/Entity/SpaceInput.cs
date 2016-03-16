@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace ConfluenceAutomator.Library
 {
-    public class Plain
+    public class SpaceInput_Plain
     {
         public string value { get; set; }
         public string representation { get { return "plain"; } }
     }
 
-    public class Description
+    public class SpaceInput_Description
     {
-        public Plain plain { get; set; }
+        public SpaceInput_Plain plain { get; set; }
     }
 
-    public class Space
+    public class SpaceInput
     {
-        public Space()
+        public SpaceInput()
         {
-            this.description = new Description();
-            this.description.plain = new Plain();
+            this.description = new SpaceInput_Description();
+            this.description.plain = new SpaceInput_Plain();
         }
         public string key { get; set; }
         public string name { get; set; }
         public string type { get { return "global"; } }
-        public Description description { get; set; }
+        public SpaceInput_Description description { get; set; }
     }
 }
