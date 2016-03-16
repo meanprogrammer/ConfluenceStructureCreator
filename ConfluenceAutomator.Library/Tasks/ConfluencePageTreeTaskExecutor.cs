@@ -41,24 +41,24 @@ namespace ConfluenceAutomator.Library
         }
 
 
-        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey, string bcTitle)
+        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey, string wsBusinessCaseTitle)
         {
             var list = StructureConstant.GetTaxonomy();
 
-            var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), bcTitle, parentKey);
+            var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), wsBusinessCaseTitle, parentKey);
 
             AlterWithNewContent(list, AppSettingsHelper.GetValue("ProjectBusinessCaseTitle"), newContent);
 
             logger.Log("Grabbing structure ...");
-            var rootSpace = ExecuteNonCurl(createSpaceUrl, ConvertToJson(CreateSpaceInstance(name, key, description)));
+            var rootSpace = ExecuteNonCurl(createSpaceUrl, JsonConvert.SerializeObject(CreateSpaceInstance(name, key, description)));
             logger.Log("Created Root Space ...");
             foreach (ConfluencePage page in list)
             {
-                var rootPage = CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Title, page.Content)));
+                var rootPage = CreateChildPage(createPageUrl, JsonConvert.SerializeObject(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Title, page.Content)));
                 logger.Log(string.Format("Created the root page : {0}", page.Title));
                 foreach (ConfluencePage t in page.ChildPages)
                 {
-                    CreateChildPage(createPageUrl, ConvertToJson(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t.Title, t.Content)));
+                    CreateChildPage(createPageUrl, JsonConvert.SerializeObject(CreateChildPageInstance(rootSpace.key, rootPage.id.ToString(), t.Title, t.Content)));
                     logger.Log(string.Format("Created the child page : {0}", t.Title));
                 }
             }
@@ -87,10 +87,7 @@ namespace ConfluenceAutomator.Library
                     p.version.number = r.version.number + 1;
                     UpdateParentPage(p.id, p);
                     logger.Log("Done updating the project parent page.");
-
-
-
-                    
+                   
                 }
                 else
                 {
@@ -128,7 +125,7 @@ namespace ConfluenceAutomator.Library
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            System.Net.Http.HttpContent content = new StringContent(ConvertToJson(param), UTF8Encoding.UTF8, "application/json");
+            System.Net.Http.HttpContent content = new StringContent(JsonConvert.SerializeObject(param), UTF8Encoding.UTF8, "application/json");
             HttpResponseMessage messge = client.PutAsync(client.BaseAddress, content).Result;
             string result = messge.Content.ReadAsStringAsync().Result;
             //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
@@ -202,11 +199,6 @@ namespace ConfluenceAutomator.Library
             sp.description.plain.value = description;
 
             return sp;
-        }
-
-        private static string ConvertToJson(object cp)
-        {
-            return JsonConvert.SerializeObject(cp);
         }
     }
 }
