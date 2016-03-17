@@ -108,5 +108,29 @@ namespace ConfluenceAutomator.WinForms
         {
             MessageBox.Show(e.Node.Checked.ToString());
         }
+
+        private void ExtractButton_Click(object sender, EventArgs e)
+        {
+            var nodes = this.ConfluencetreeView.Nodes;
+            foreach (TreeNode tn in nodes)
+            {
+                if (tn.Checked == true)
+                { 
+                     
+                }
+            }
+        }
+
+        private void BuildMapping(TreeNodeCollection nodes, PageTreeItem item)
+        {
+            foreach (TreeNode tn in nodes)
+            {
+                if (tn.Checked == true)
+                { 
+
+                }
+            }
+        }
+
     }
 }
