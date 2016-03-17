@@ -27,7 +27,7 @@ namespace ConfluenceAutomator.WinForms
             this.ParentSpaceComboBox.DisplayMember = "name";
             this.ParentSpaceComboBox.DataSource = r;
 
-            this.ConfluencetreeView.Nodes.Add( confSpaceService.CreateSpaceTreeNode(r.Where(x => x.key == "BPM").FirstOrDefault()) );
+            ConfluenceBackgroundWorker.RunWorkerAsync();
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
         }
 
@@ -90,6 +90,23 @@ namespace ConfluenceAutomator.WinForms
                     }
                 }
             }
+        }
+
+        private void ConfluenceBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor();
+            e.Result = confSpaceService.CreateSpaceTreeNode(confSpaceService.Execute(this).Where(x => x.key == "BPM").FirstOrDefault());
+        }
+
+        private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.ConfluencetreeView.Nodes.Add(e.Result as TreeNode);
+            //this.ConfluencetreeView.ExpandAll();
+        }
+
+        private void ConfluencetreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            MessageBox.Show(e.Node.Checked.ToString());
         }
     }
 }

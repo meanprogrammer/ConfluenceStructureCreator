@@ -44,6 +44,7 @@
             this.ConfluencetreeView = new System.Windows.Forms.TreeView();
             this.RunButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.ConfluenceBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,6 +182,7 @@
             this.ConfluencetreeView.Name = "ConfluencetreeView";
             this.ConfluencetreeView.Size = new System.Drawing.Size(474, 512);
             this.ConfluencetreeView.TabIndex = 10;
+            this.ConfluencetreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ConfluencetreeView_NodeMouseDoubleClick);
             // 
             // RunButton
             // 
@@ -201,6 +203,12 @@
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // ConfluenceBackgroundWorker
+            // 
+            this.ConfluenceBackgroundWorker.WorkerReportsProgress = true;
+            this.ConfluenceBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ConfluenceBackgroundWorker_DoWork);
+            this.ConfluenceBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ConfluenceBackgroundWorker_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -241,6 +249,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox PipelineBCcomboBox;
         private System.Windows.Forms.TreeView ConfluencetreeView;
+        private System.ComponentModel.BackgroundWorker ConfluenceBackgroundWorker;
     }
 }
 
