@@ -21,21 +21,14 @@ namespace ConfluenceAutomator.WinForms
         private void MainForm_Load(object sender, EventArgs e)
         {
             
-            ConfluenceSpaceTaskExecutor spaces = new ConfluenceSpaceTaskExecutor();
-            List<Result> r = spaces.Execute(this);
+            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor();
+            List<Result> r = confSpaceService.Execute(this);
             this.ParentSpaceComboBox.ValueMember = "key";
             this.ParentSpaceComboBox.DisplayMember = "name";
             this.ParentSpaceComboBox.DataSource = r;
 
+            this.ConfluencetreeView.Nodes.Add( confSpaceService.CreateSpaceTreeNode(r.Where(x => x.key == "BPM").FirstOrDefault()) );
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
-            
-            /*
-            TreeNode mainNode = new TreeNode();
-            mainNode.Text = "Topmost Node";
-            mainNode.Nodes.Add("Node1", "1");
-
-            this.treeView1.Nodes.Add(mainNode);
-            */
         }
 
         private void RunButton_Click(object sender, EventArgs e)

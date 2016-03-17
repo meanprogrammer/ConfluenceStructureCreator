@@ -95,7 +95,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfluenceAutomator.Library\ConfluenceAutomator.Library.csproj">
@@ -105,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Oxygen-Icons.org-Oxygen-Apps-preferences-plugin-script.ico" />
+    <Content Include="TreeMappings.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

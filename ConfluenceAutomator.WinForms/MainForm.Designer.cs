@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.LogTextbox = new System.Windows.Forms.TextBox();
             this.PipelineBCcomboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.ParentSpaceComboBox = new System.Windows.Forms.ComboBox();
@@ -40,17 +41,16 @@
             this.KeyTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.ConfluencetreeView = new System.Windows.Forms.TreeView();
             this.RunButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.LogTextbox = new System.Windows.Forms.TextBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.treeView1);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.LogTextbox);
             this.groupBox1.Controls.Add(this.PipelineBCcomboBox);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.ParentSpaceComboBox);
@@ -77,6 +77,17 @@
             this.label5.Size = new System.Drawing.Size(72, 20);
             this.label5.TabIndex = 9;
             this.label5.Text = "BC Page";
+            // 
+            // LogTextbox
+            // 
+            this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
+            this.LogTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogTextbox.Location = new System.Drawing.Point(5, 277);
+            this.LogTextbox.Multiline = true;
+            this.LogTextbox.Name = "LogTextbox";
+            this.LogTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LogTextbox.Size = new System.Drawing.Size(474, 193);
+            this.LogTextbox.TabIndex = 3;
             // 
             // PipelineBCcomboBox
             // 
@@ -163,6 +174,14 @@
             this.NameTextBox.Size = new System.Drawing.Size(325, 29);
             this.NameTextBox.TabIndex = 0;
             // 
+            // ConfluencetreeView
+            // 
+            this.ConfluencetreeView.CheckBoxes = true;
+            this.ConfluencetreeView.Location = new System.Drawing.Point(499, 12);
+            this.ConfluencetreeView.Name = "ConfluencetreeView";
+            this.ConfluencetreeView.Size = new System.Drawing.Size(474, 512);
+            this.ConfluencetreeView.TabIndex = 10;
+            // 
             // RunButton
             // 
             this.RunButton.Location = new System.Drawing.Point(313, 484);
@@ -183,30 +202,12 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // LogTextbox
-            // 
-            this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
-            this.LogTextbox.Location = new System.Drawing.Point(499, 12);
-            this.LogTextbox.Multiline = true;
-            this.LogTextbox.Name = "LogTextbox";
-            this.LogTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LogTextbox.Size = new System.Drawing.Size(474, 250);
-            this.LogTextbox.TabIndex = 3;
-            // 
-            // treeView1
-            // 
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Location = new System.Drawing.Point(26, 284);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(453, 186);
-            this.treeView1.TabIndex = 10;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 532);
-            this.Controls.Add(this.LogTextbox);
+            this.Controls.Add(this.ConfluencetreeView);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.RunButton);
             this.Controls.Add(this.groupBox1);
@@ -220,7 +221,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -240,7 +240,7 @@
         private System.Windows.Forms.ComboBox ParentSpaceComboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox PipelineBCcomboBox;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView ConfluencetreeView;
     }
 }
 
