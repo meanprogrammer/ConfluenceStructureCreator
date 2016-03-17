@@ -115,8 +115,8 @@ namespace ConfluenceAutomator.WinForms
             foreach (TreeNode tn in nodes)
             {
                 if (tn.Checked == true)
-                { 
-                     
+                {
+          
                 }
             }
         }
