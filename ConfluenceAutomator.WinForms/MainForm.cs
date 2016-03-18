@@ -1,5 +1,6 @@
 ﻿using ConfluenceAutomator.Library;
 using ConfluenceAutomator.Library.Helper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,11 +34,6 @@ namespace ConfluenceAutomator.WinForms
 
         private void RunButton_Click(object sender, EventArgs e)
         {
-
-            MappingHelper.GetMapping();
-
-            return;
-
             if (string.IsNullOrEmpty(this.NameTextBox.Text.Trim()))
             {
                 MessageBox.Show("Name must be defined.", "Validation Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -53,17 +49,73 @@ namespace ConfluenceAutomator.WinForms
             this.RunButton.Enabled = false;
             this.CancelButton.Enabled = false;
 
-            ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
-
-            ChildPagesOutput_Result bc = this.PipelineBCcomboBox.SelectedItem as ChildPagesOutput_Result;
-
-            task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString(), bc.title);
-
+            var list = StructureConstant.GetTaxonomy();
 
             /* START THE COPY PROCESS */
 
-          
+            PageTreeMapping mappings = MappingHelper.GetMapping();
 
+            foreach (PageTreeMappingItem map in mappings.Mappings)
+            {
+                //Find it on the tree
+                TreeNode[] treeNodes = this.ConfluencetreeView.Nodes.Find(map.FromPageTitle, true);
+                var found = treeNodes.FirstOrDefault();
+                if (found != null && found.Checked)
+                {
+                    //Now we have the item to copy
+                    var fromCopy = TreeNodeHelper.GetFirstCheckedChild(found.Nodes);
+                    var s = fromCopy.Text;
+                    //Here is the destination
+                    var toCopy = map.ToPageTitle;
+
+                    var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), s, "BPM");
+
+                    StructureHelper.AlterWithNewContent(list, toCopy, newContent);
+
+                }
+            }
+
+            
+
+            ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(list);
+
+            //ChildPagesOutput_Result bc = this.PipelineBCcomboBox.SelectedItem as ChildPagesOutput_Result;
+
+            task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString());
+
+
+            foreach (BackwardPageTreeMapping bMap in mappings.BackwardMappings)
+            {
+                var parentFunctionalRequirements = task.GetPageByKeyAndTitle(mappings.FromSpace, bMap.FromPageTitle);
+                if (parentFunctionalRequirements != null)
+                {
+                    if (parentFunctionalRequirements.results.Count == 1)
+                    {
+                        var funcPage = parentFunctionalRequirements.results.FirstOrDefault();
+                        if (funcPage != null)
+                        {
+                            task.CreateChildPage(
+                                AppSettingsHelper.GetValue("CreatePageUrl"), 
+                                JsonConvert.SerializeObject(
+                                    task.CreateChildPageInstance(
+                                                            mappings.FromSpace, funcPage.id, 
+                                                           string.Format("{0} - {1}",this.NameTextBox.Text.Trim(), bMap.ToPageTitle),
+                                    string.Format(
+                                        AppSettingsHelper.GetValue("includePageContent"), 
+                                        bMap.FromPageTitle, this.KeyTextbox.Text.Trim()
+                                    )
+                                )));
+                        }
+                    }
+                    else
+                    {
+                        this.Log("Cannot find Functional Requirement Parent Page.");
+                    }
+                }
+            }
+
+            
+           
 
             this.RunButton.Enabled = true;
             this.CancelButton.Enabled = true;
@@ -84,7 +136,8 @@ namespace ConfluenceAutomator.WinForms
             var defaultSelected = this.ParentSpaceComboBox.SelectedItem as Result;
             if (defaultSelected != null)
             {
-                PageByTitleAndKeyOutput page = ConfluencePageTreeTaskExecutor.GetPageByKeyAndTitle(defaultSelected.key, "PipelineBusinessCaseTitle");
+                ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
+                PageByTitleAndKeyOutput page = task.GetPageByKeyAndTitle(defaultSelected.key, "PipelineBusinessCaseTitle");
                 if (page != null && page.results.Count == 1)
                 {
                     ConfluenceChildPagesTaskExecutor bcChildren = new ConfluenceChildPagesTaskExecutor();

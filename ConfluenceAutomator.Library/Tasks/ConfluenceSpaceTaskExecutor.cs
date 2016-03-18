@@ -47,7 +47,13 @@ namespace ConfluenceAutomator.Library
                 string childUrl = AppSettingsHelper.GetValue("baseUrl") + string.Format("/rest/api/content/{0}/child/page", item.id);
 
                 ChildPagesOutput childPages = Execute<ChildPagesOutput>(childUrl, "vd2:Welcome1");
-                currentTreeNode.Nodes.Add(item.id, item.title);
+
+                TreeNode newNode = new TreeNode();
+                newNode.Text = item.title;
+                newNode.Name = item.title;
+                newNode.Tag = item;
+
+                currentTreeNode.Nodes.Add(newNode);
 
                 if (childPages.results.Count > 0)
                 {

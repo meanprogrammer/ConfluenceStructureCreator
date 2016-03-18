@@ -144,7 +144,6 @@ namespace ConfluenceAutomator.Library
             b.ChildPages.Add(new ConfluencePage() { Title = "1.14 Transition and Maintenance Plan", Content = string.Empty });
             list.Add(b);
             
-
             var c = new ConfluencePage();
             c.Title = "2. Solution Design Phase";
             c.Content = ConstantContent.DISPLAY_CHILDREN_MARKUP;
@@ -221,7 +220,6 @@ namespace ConfluenceAutomator.Library
             g.ChildPages.Add(new ConfluencePage() { Title = "6.06 Stakeholder Matrix", Content = string.Empty });
             g.ChildPages.Add(new ConfluencePage() { Title = "6.07 Team Roster", Content = string.Empty });
             list.Add(g);
-          
             
             return list;
         }

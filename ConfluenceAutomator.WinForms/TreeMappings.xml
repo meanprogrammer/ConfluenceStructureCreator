@@ -24,4 +24,22 @@
       <ToPageTitle>0.07 Business Scenarios</ToPageTitle>
     </PageTreeMappingItem>
   </Mappings>
+  <BackwardMappings>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.01 Functional Requirements</FromPageTitle>
+      <ToPageTitle>1.01 Functional Requirements</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.02 Non-Functional Requirements</FromPageTitle>
+      <ToPageTitle>1.02 Non-Functional Requirements</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.03 Mockups/ Prototypes</FromPageTitle>
+      <ToPageTitle>1.03 Mockups/ Prototypes</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.04 Detailed Use Case Specifications</FromPageTitle>
+      <ToPageTitle>1.04 Detailed Use Case Specifications</ToPageTitle>
+    </BackwardPageTreeMapping>
+  </BackwardMappings>
 </PageTreeMapping>

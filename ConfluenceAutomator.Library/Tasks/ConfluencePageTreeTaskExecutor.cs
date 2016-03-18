@@ -18,41 +18,24 @@ namespace ConfluenceAutomator.Library
         static string createSpaceUrl = AppSettingsHelper.GetValue("CreateSpaceUrl");
         static string createPageUrl = AppSettingsHelper.GetValue("CreatePageUrl");
 
-        private List<ConfluencePage> AlterWithNewContent(List<ConfluencePage> list, string key, string newContent)
+        private List<ConfluencePage> structure;
+
+        public ConfluencePageTreeTaskExecutor(List<ConfluencePage> structure)
         {
-            var result = list;
-            foreach (ConfluencePage c in list)
-            {
-                if (c.Title == key)
-                {
-                    c.Content = newContent;
-                    return list;
-                }
-                if (c.ChildPages.Count > 0)
-                {
-                    result = AlterWithNewContent(c.ChildPages, key, newContent);
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            return result;
+            this.structure = structure;
         }
 
+        public ConfluencePageTreeTaskExecutor() { }
 
-        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey, string wsBusinessCaseTitle)
+
+        public void Execute(IFormLogger logger, string name, string key, string description, string parentKey)
         {
-            var list = StructureConstant.GetTaxonomy();
-
-            var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), wsBusinessCaseTitle, parentKey);
-
-            AlterWithNewContent(list, AppSettingsHelper.GetValue("ProjectBusinessCaseTitle"), newContent);
+            
 
             logger.Log("Grabbing structure ...");
             var rootSpace = ExecuteNonCurl(createSpaceUrl, JsonConvert.SerializeObject(CreateSpaceInstance(name, key, description)));
             logger.Log("Created Root Space ...");
-            foreach (ConfluencePage page in list)
+            foreach (ConfluencePage page in this.structure)
             {
                 var rootPage = CreateChildPage(createPageUrl, JsonConvert.SerializeObject(CreateChildPageInstance(rootSpace.key, rootSpace.homepage.id, page.Title, page.Content)));
                 logger.Log(string.Format("Created the root page : {0}", page.Title));
@@ -100,24 +83,7 @@ namespace ConfluenceAutomator.Library
             }
 
 
-            var parentFunctionalRequirements = GetPageByKeyAndTitle(parentKey, "ParentFunctionalRequirementTitle");
-            if (parentFunctionalRequirements != null)
-            {
-                if (parentFunctionalRequirements.results.Count == 1)
-                {
-                    var funcPage = parentFunctionalRequirements.results.FirstOrDefault();
-                    if (funcPage != null)
-                    {
-                        CreateChildPage(createPageUrl, JsonConvert.SerializeObject(CreateChildPageInstance(parentKey, funcPage.id, rootSpace.name,
-                            string.Format(AppSettingsHelper.GetValue("includePageContent"), "1.01 Functional Requirements", rootSpace.key)
-                            )));
-                    }
-                }
-                else
-                {
-                    logger.Log("Cannot find Functional Requirement Parent Page.");
-                }
-            }
+            
             logger.Log("Task Complete.");
         }
 
@@ -151,9 +117,9 @@ namespace ConfluenceAutomator.Library
             //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
         }
 
-        public static PageByTitleAndKeyOutput GetPageByKeyAndTitle(string parentKey, string appSettingsKey)
+        public PageByTitleAndKeyOutput GetPageByKeyAndTitle(string parentKey, string pageTitle)
         {
-            var pageTitle = AppSettingsHelper.GetValue(appSettingsKey);
+            //var pageTitle = AppSettingsHelper.GetValue(appSettingsKey);
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("GetPageByTitleAndKeyUrl"), pageTitle, parentKey));
@@ -183,7 +149,7 @@ namespace ConfluenceAutomator.Library
             return obj;
         }
 
-        private static SpaceOutput CreateChildPage(string url, string payload)
+        public SpaceOutput CreateChildPage(string url, string payload)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(url);
@@ -198,7 +164,7 @@ namespace ConfluenceAutomator.Library
             return obj;
         }
 
-        private static ChildPageInput CreateChildPageInstance(string key, string rootId, string title, string value)
+        public ChildPageInput CreateChildPageInstance(string key, string rootId, string title, string value)
         {
             ChildPageInput cp = new ChildPageInput();
             cp.ancestors = new List<ChildPage_Ancestor>();
