@@ -1,27 +1,27 @@
-﻿<?xml version="1.0"?>
-<ConfluenceTreeViewMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PageTreeMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <FromSpace>BPM</FromSpace>
   <ToSpace>OP8</ToSpace>
   <Mappings>
-    <ConfluenceTreeViewMappingItem>
+    <PageTreeMappingItem>
       <FromPageTitle>Concept Paper</FromPageTitle>
       <ToPageTitle>0.01 Concept Paper</ToPageTitle>
-    </ConfluenceTreeViewMappingItem>
-    <ConfluenceTreeViewMappingItem>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
       <FromPageTitle>High Level Process and Vision Design</FromPageTitle>
       <ToPageTitle>0.03 High-level Process and Vision Design</ToPageTitle>
-    </ConfluenceTreeViewMappingItem>
-    <ConfluenceTreeViewMappingItem>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
       <FromPageTitle>Business Case</FromPageTitle>
       <ToPageTitle>0.02 Business Case</ToPageTitle>
-    </ConfluenceTreeViewMappingItem>
-    <ConfluenceTreeViewMappingItem>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
       <FromPageTitle>Process and Sub-process Documents</FromPageTitle>
       <ToPageTitle>0.06 Process and Sub-process Documents</ToPageTitle>
-    </ConfluenceTreeViewMappingItem>
-    <ConfluenceTreeViewMappingItem>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
       <FromPageTitle>Business Scenarios</FromPageTitle>
       <ToPageTitle>0.07 Business Scenarios</ToPageTitle>
-    </ConfluenceTreeViewMappingItem>
+    </PageTreeMappingItem>
   </Mappings>
-</ConfluenceTreeViewMapping>
+</PageTreeMapping>

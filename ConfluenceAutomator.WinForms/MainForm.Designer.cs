@@ -79,6 +79,7 @@
             this.label5.Size = new System.Drawing.Size(72, 20);
             this.label5.TabIndex = 9;
             this.label5.Text = "BC Page";
+            this.label5.Visible = false;
             // 
             // LogTextbox
             // 
@@ -99,6 +100,7 @@
             this.PipelineBCcomboBox.Name = "PipelineBCcomboBox";
             this.PipelineBCcomboBox.Size = new System.Drawing.Size(325, 32);
             this.PipelineBCcomboBox.TabIndex = 8;
+            this.PipelineBCcomboBox.Visible = false;
             // 
             // label4
             // 

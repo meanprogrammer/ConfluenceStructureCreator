@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceAutomator.Library
 {
-
+    [Serializable()]
     public class PageTreeMapping
     {
         public string FromSpace { get; set; }
@@ -14,7 +14,7 @@ namespace ConfluenceAutomator.Library
 
         public List<PageTreeMappingItem> Mappings { get; set; }
     }
-
+    [Serializable()]
     public class PageTreeMappingItem
     {
         public string FromPageTitle { get; set; }

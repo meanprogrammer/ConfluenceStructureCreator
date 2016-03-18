@@ -1,4 +1,5 @@
 ﻿using ConfluenceAutomator.Library;
+using ConfluenceAutomator.Library.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,12 +28,16 @@ namespace ConfluenceAutomator.WinForms
             this.ParentSpaceComboBox.DisplayMember = "name";
             this.ParentSpaceComboBox.DataSource = r;
 
-            ConfluenceBackgroundWorker.RunWorkerAsync();
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
         }
 
         private void RunButton_Click(object sender, EventArgs e)
         {
+
+            MappingHelper.GetMapping();
+
+            return;
+
             if (string.IsNullOrEmpty(this.NameTextBox.Text.Trim()))
             {
                 MessageBox.Show("Name must be defined.", "Validation Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -53,6 +58,13 @@ namespace ConfluenceAutomator.WinForms
             ChildPagesOutput_Result bc = this.PipelineBCcomboBox.SelectedItem as ChildPagesOutput_Result;
 
             task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString(), bc.title);
+
+
+            /* START THE COPY PROCESS */
+
+          
+
+
             this.RunButton.Enabled = true;
             this.CancelButton.Enabled = true;
         }
@@ -90,12 +102,23 @@ namespace ConfluenceAutomator.WinForms
                     }
                 }
             }
+            this.ConfluencetreeView.Nodes.Clear();
+            if (!ConfluenceBackgroundWorker.IsBusy)
+            {
+                string key = string.Empty;
+                var selectedItem = this.ParentSpaceComboBox.SelectedItem as Result;
+                if(selectedItem != null)
+                {
+                    key = selectedItem.key;
+                }
+                ConfluenceBackgroundWorker.RunWorkerAsync(key);
+            }
         }
 
         private void ConfluenceBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor();
-            e.Result = confSpaceService.CreateSpaceTreeNode(confSpaceService.Execute(this).Where(x => x.key == "BPM").FirstOrDefault());
+            e.Result = confSpaceService.CreateSpaceTreeNode(confSpaceService.Execute(this).Where(x => x.key == e.Argument.ToString()).FirstOrDefault());
         }
 
         private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

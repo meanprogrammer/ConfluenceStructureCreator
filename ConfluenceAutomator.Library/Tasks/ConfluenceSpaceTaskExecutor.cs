@@ -29,7 +29,7 @@ namespace ConfluenceAutomator.Library
 
         public TreeNode CreateSpaceTreeNode(Result space)
         {
-            TreeNode result = new TreeNode("Business Process Management");
+            TreeNode result = new TreeNode(space.name);
             if (space == null)
                 return result;
 
