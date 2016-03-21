@@ -42,5 +42,46 @@
       <FromPageTitle>1.04 Detailed Use Case Specifications</FromPageTitle>
       <ToPageTitle>1.04 Detailed Use Case Specifications</ToPageTitle>
     </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.05 Information Models</FromPageTitle>
+      <ToPageTitle>1.05 Information Models</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.06 Security Profiles</FromPageTitle>
+      <ToPageTitle>1.06 Security Profiles</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.07 Gap Analysis</FromPageTitle>
+      <ToPageTitle>1.07 Gap Analysis</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.08 Application and Infrastructure Design</FromPageTitle>
+      <ToPageTitle>1.08 Application and Infrastructure Design</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.09 Project Master Test Plan</FromPageTitle>
+      <ToPageTitle>1.09 Project Master Test Plan</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.10 Data Conversion Plan</FromPageTitle>
+      <ToPageTitle>1.10 Data Conversion Plan</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.11 Business Change Management Strategy</FromPageTitle>
+      <ToPageTitle>1.11 Business Change Management Strategy</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.12 Needs Analysis</FromPageTitle>
+      <ToPageTitle>1.12  Needs Analysis</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.13 High-level Solution Deployment Plan</FromPageTitle>
+      <ToPageTitle>1.13 High-level Solution Deployment Plan</ToPageTitle>
+    </BackwardPageTreeMapping>
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.14 Transition and Maintenance Plan</FromPageTitle>
+      <ToPageTitle>1.14 Transition and Maintenance Plan</ToPageTitle>
+    </BackwardPageTreeMapping>
+    
   </BackwardMappings>
 </PageTreeMapping>
