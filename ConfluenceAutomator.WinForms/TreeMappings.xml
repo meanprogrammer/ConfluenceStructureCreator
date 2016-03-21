@@ -33,7 +33,9 @@
       <ToPageTitle>1.02 Non-Functional Requirements</ToPageTitle>
     </BackwardPageTreeMapping>
     <BackwardPageTreeMapping>
-      <FromPageTitle>1.03 Mockups/ Prototypes</FromPageTitle>
+      <!-- THE TITLE FROM THE CREATE WS-->
+      <FromPageTitle>1.03 Mockups/Prototypes</FromPageTitle>
+      <!-- THE TITLE FROM THE ORIGINAL BPM-->
       <ToPageTitle>1.03 Mockups/ Prototypes</ToPageTitle>
     </BackwardPageTreeMapping>
     <BackwardPageTreeMapping>

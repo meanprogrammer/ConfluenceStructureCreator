@@ -85,23 +85,21 @@ namespace ConfluenceAutomator.WinForms
 
             foreach (BackwardPageTreeMapping bMap in mappings.BackwardMappings)
             {
-                var parentFunctionalRequirements = task.GetPageByKeyAndTitle(mappings.FromSpace, bMap.FromPageTitle);
-                if (parentFunctionalRequirements != null)
+                var parentReq = task.GetPageByKeyAndTitle(mappings.FromSpace, bMap.ToPageTitle);
+                if (parentReq != null)
                 {
-                    if (parentFunctionalRequirements.results.Count == 1)
+                    if (parentReq.results.Count == 1)
                     {
-                        var funcPage = parentFunctionalRequirements.results.FirstOrDefault();
+                        var funcPage = parentReq.results.FirstOrDefault();
                         if (funcPage != null)
                         {
                             task.CreateChildPage(
                                 AppSettingsHelper.GetValue("CreatePageUrl"), 
                                 JsonConvert.SerializeObject(
                                     task.CreateChildPageInstance(
-                                                            mappings.FromSpace, funcPage.id, 
-                                                           string.Format("{0} - {1}",this.NameTextBox.Text.Trim(), bMap.ToPageTitle),
-                                    string.Format(
-                                        AppSettingsHelper.GetValue("includePageContent"), 
-                                        bMap.FromPageTitle, this.KeyTextbox.Text.Trim()
+                                            mappings.FromSpace, funcPage.id, 
+                                            string.Format("{0} - {1}",this.NameTextBox.Text.Trim(), bMap.FromPageTitle),
+                                            string.Format(AppSettingsHelper.GetValue("includePageContent"), bMap.FromPageTitle, this.KeyTextbox.Text.Trim()
                                     )
                                 )));
                         }

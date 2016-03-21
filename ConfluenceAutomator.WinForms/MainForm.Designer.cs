@@ -84,6 +84,7 @@
             // LogTextbox
             // 
             this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
+            this.LogTextbox.Enabled = false;
             this.LogTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LogTextbox.Location = new System.Drawing.Point(5, 277);
             this.LogTextbox.Multiline = true;
