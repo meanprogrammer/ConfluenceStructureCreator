@@ -222,6 +222,7 @@
             this.ExtractButton.TabIndex = 11;
             this.ExtractButton.Text = "Extract";
             this.ExtractButton.UseVisualStyleBackColor = true;
+            this.ExtractButton.Visible = false;
             this.ExtractButton.Click += new System.EventHandler(this.ExtractButton_Click);
             // 
             // MainForm

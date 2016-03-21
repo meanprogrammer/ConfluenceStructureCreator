@@ -130,6 +130,10 @@ namespace ConfluenceAutomator.WinForms
 
         private void ParentSpaceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.ParentSpaceComboBox.Enabled = false;
+            this.RunButton.Enabled = false;
+            this.CancelButton.Enabled = false;
+
             var defaultSelected = this.ParentSpaceComboBox.SelectedItem as Result;
             if (defaultSelected != null)
             {
@@ -174,7 +178,9 @@ namespace ConfluenceAutomator.WinForms
         private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.ConfluencetreeView.Nodes.Add(e.Result as TreeNode);
-            //this.ConfluencetreeView.ExpandAll();
+            this.ParentSpaceComboBox.Enabled = true;
+            this.RunButton.Enabled = true;
+            this.CancelButton.Enabled = true;
         }
 
         private void ConfluencetreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
