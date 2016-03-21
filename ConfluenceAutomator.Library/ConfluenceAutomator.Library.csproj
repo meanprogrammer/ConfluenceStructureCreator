@@ -56,6 +56,7 @@
     <Compile Include="Helper\AppSettingsHelper.cs" />
     <Compile Include="Entity\ChildPageInput.cs" />
     <Compile Include="Entity\ChildPagesOutput.cs" />
+    <Compile Include="Helper\HttpClientHelper.cs" />
     <Compile Include="Helper\MappingHelper.cs" />
     <Compile Include="Helper\StructureHelper.cs" />
     <Compile Include="Helper\TreeNodeHelper.cs" />

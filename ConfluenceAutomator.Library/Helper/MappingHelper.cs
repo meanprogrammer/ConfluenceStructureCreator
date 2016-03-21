@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ConfluenceAutomator.Library.Helper
+namespace ConfluenceAutomator.Library
 {
     public class MappingHelper
     {
-        public static PageTreeMapping GetMapping()
+        public static PageTreeMapping GetMapping(string currentSpace)
         {
             PageTreeMapping mappings = null;
             string path = "TreeMappings.xml";
@@ -19,6 +19,7 @@ namespace ConfluenceAutomator.Library.Helper
 
             StreamReader reader = new StreamReader(path);
             mappings = (PageTreeMapping)serializer.Deserialize(reader);
+            mappings.ToSpace = currentSpace;
             reader.Close();
             return mappings;
         }

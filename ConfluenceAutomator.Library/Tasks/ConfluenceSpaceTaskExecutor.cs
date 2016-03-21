@@ -11,9 +11,23 @@ namespace ConfluenceAutomator.Library
 {
     public class ConfluenceSpaceTaskExecutor
     {
-        static string credentials = string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
-        public List<Result> Execute(IFormLogger logger)
+        private IFormLogger logger;
+
+
+        public ConfluenceSpaceTaskExecutor()
+        { 
+
+        }
+
+        public ConfluenceSpaceTaskExecutor(IFormLogger logger)
         {
+            this.logger = logger;
+        }
+
+        static string credentials = string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
+        public AllSpaces Execute()
+        {
+            /*
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(AppSettingsHelper.GetValue("CreateSpaceUrl"));
             byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
@@ -25,6 +39,8 @@ namespace ConfluenceAutomator.Library
             string result = messge.Content.ReadAsStringAsync().Result;
             AllSpaces obj = JsonConvert.DeserializeObject<AllSpaces>(result);
             return obj.results;
+            */
+            return HttpClientHelper.Execute<AllSpaces>(AppSettingsHelper.GetValue("CreateSpaceUrl"), string.Empty, this.logger);
         }
 
         public TreeNode CreateSpaceTreeNode(Result space)
@@ -34,7 +50,7 @@ namespace ConfluenceAutomator.Library
                 return result;
 
             string childUrl = AppSettingsHelper.GetValue("baseUrl") + space._expandable.homepage + "/child/page";
-            var rootPages = Execute<ChildPagesOutput>(childUrl, "vd2:Welcome1");
+            var rootPages = HttpClientHelper.Execute<ChildPagesOutput>(childUrl, this.logger);
             CreateIndividualTreeNode(result, rootPages.results);
 
             return result;
@@ -46,7 +62,7 @@ namespace ConfluenceAutomator.Library
             {
                 string childUrl = AppSettingsHelper.GetValue("baseUrl") + string.Format("/rest/api/content/{0}/child/page", item.id);
 
-                ChildPagesOutput childPages = Execute<ChildPagesOutput>(childUrl, "vd2:Welcome1");
+                ChildPagesOutput childPages = HttpClientHelper.Execute<ChildPagesOutput>(childUrl, credentials, this.logger);
 
                 TreeNode newNode = new TreeNode();
                 newNode.Text = item.title;
@@ -72,19 +88,6 @@ namespace ConfluenceAutomator.Library
         }
 
 
-        private T Execute<T>(string url, string credentials)
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(url);
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            T obj = JsonConvert.DeserializeObject<T>(result);
-            return obj;
-        }
+ 
     }
 }

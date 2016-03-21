@@ -1,5 +1,4 @@
 ﻿using ConfluenceAutomator.Library;
-using ConfluenceAutomator.Library.Helper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,11 +22,11 @@ namespace ConfluenceAutomator.WinForms
         private void MainForm_Load(object sender, EventArgs e)
         {
             
-            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor();
-            List<Result> r = confSpaceService.Execute(this);
+            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor(this);
+            AllSpaces r = confSpaceService.Execute();
             this.ParentSpaceComboBox.ValueMember = "key";
             this.ParentSpaceComboBox.DisplayMember = "name";
-            this.ParentSpaceComboBox.DataSource = r;
+            this.ParentSpaceComboBox.DataSource = r.results;
 
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
         }
@@ -53,7 +52,7 @@ namespace ConfluenceAutomator.WinForms
 
             /* START THE COPY PROCESS */
 
-            PageTreeMapping mappings = MappingHelper.GetMapping();
+            PageTreeMapping mappings = MappingHelper.GetMapping(this.KeyTextbox.Text.Trim());
 
             foreach (PageTreeMappingItem map in mappings.Mappings)
             {
@@ -141,7 +140,7 @@ namespace ConfluenceAutomator.WinForms
                 if (page != null && page.results.Count == 1)
                 {
                     ConfluenceChildPagesTaskExecutor bcChildren = new ConfluenceChildPagesTaskExecutor();
-                    List<ChildPagesOutput_Result> rs = bcChildren.Execute(this, page.results.FirstOrDefault().id);
+                    List<ChildPagesOutput_Result> rs = bcChildren.Execute(page.results.FirstOrDefault().id).results;
 
                     if (rs.Count < 1)
                     {
@@ -170,8 +169,8 @@ namespace ConfluenceAutomator.WinForms
 
         private void ConfluenceBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor();
-            e.Result = confSpaceService.CreateSpaceTreeNode(confSpaceService.Execute(this).Where(x => x.key == e.Argument.ToString()).FirstOrDefault());
+            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor(this);
+            e.Result = confSpaceService.CreateSpaceTreeNode(confSpaceService.Execute().results.Where(x => x.key == e.Argument.ToString()).FirstOrDefault());
         }
 
         private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
