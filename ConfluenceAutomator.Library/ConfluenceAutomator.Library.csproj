@@ -51,8 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\AllSpaces.cs" />
+    <Compile Include="Entity\Method.cs" />
     <Compile Include="Entity\PageTreeItem.cs" />
     <Compile Include="Entity\PageTreeMapping.cs" />
+    <Compile Include="Entity\UpdatePageOutput.cs" />
     <Compile Include="Helper\AppSettingsHelper.cs" />
     <Compile Include="Entity\ChildPageInput.cs" />
     <Compile Include="Entity\ChildPagesOutput.cs" />

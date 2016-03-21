@@ -19,10 +19,11 @@ namespace ConfluenceAutomator.Library
         static string createPageUrl = AppSettingsHelper.GetValue("CreatePageUrl");
 
         private List<ConfluencePage> structure;
-
-        public ConfluencePageTreeTaskExecutor(List<ConfluencePage> structure)
+        private IFormLogger logger;
+        public ConfluencePageTreeTaskExecutor(List<ConfluencePage> structure, IFormLogger logger)
         {
             this.structure = structure;
+            this.logger = logger;
         }
 
         public ConfluencePageTreeTaskExecutor() { }
@@ -48,7 +49,7 @@ namespace ConfluenceAutomator.Library
 
             logger.Log("Updating parent Space.");
 
-            var parentBusinessCase = GetPageByKeyAndTitle(parentKey, "ParentBusinessCaseTitle");
+            var parentBusinessCase = GetPageByKeyAndTitle(parentKey, AppSettingsHelper.GetValue("ParentBusinessCaseTitle"));
             if (parentBusinessCase != null)
             {
                 if (parentBusinessCase.results.Count() == 1)
@@ -59,7 +60,7 @@ namespace ConfluenceAutomator.Library
 
                     int index = html.IndexOf("</ul>");
 
-                    var childBusinessCase = GetPageByKeyAndTitle(rootSpace.key, "ProjectBusinessCaseTitle");
+                    var childBusinessCase = GetPageByKeyAndTitle(rootSpace.key, AppSettingsHelper.GetValue("ProjectBusinessCaseTitle"));
                     string newHtml = html.Insert(index, string.Format(@"<li><a href='{0}'>{1}</a></li>", ExtractLinkFromChildBusinessCase(childBusinessCase), rootSpace.name));
 
                     UpdatePageInput p = new UpdatePageInput();
@@ -103,8 +104,9 @@ namespace ConfluenceAutomator.Library
             return link;
         }
 
-        private static void UpdateParentPage(string pageId, UpdatePageInput param)
+        public UpdatePageOutput UpdateParentPage(string pageId, UpdatePageInput param)
         {
+            /*
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("UpdatePageUrl"), pageId));
             byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
@@ -114,7 +116,11 @@ namespace ConfluenceAutomator.Library
             System.Net.Http.HttpContent content = new StringContent(JsonConvert.SerializeObject(param), UTF8Encoding.UTF8, "application/json");
             HttpResponseMessage messge = client.PutAsync(client.BaseAddress, content).Result;
             string result = messge.Content.ReadAsStringAsync().Result;
+            */
             //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
+
+            string url = string.Format(AppSettingsHelper.GetValue("UpdatePageUrl"), pageId);
+            return HttpClientHelper.ExecutePut<UpdatePageOutput>(url, JsonConvert.SerializeObject(param), this.logger);
         }
 
         public PageByTitleAndKeyOutput GetPageByKeyAndTitle(string parentKey, string pageTitle)
@@ -134,8 +140,9 @@ namespace ConfluenceAutomator.Library
             return obj;
         }
 
-        private static SpaceOutput ExecuteNonCurl(string url, string payload)
+        private SpaceOutput ExecuteNonCurl(string url, string payload)
         {
+            /*
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri(url);
             byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
@@ -147,6 +154,8 @@ namespace ConfluenceAutomator.Library
             string result = messge.Content.ReadAsStringAsync().Result;
             SpaceOutput obj = JsonConvert.DeserializeObject<SpaceOutput>(result);
             return obj;
+            */
+            return HttpClientHelper.ExecutePost<SpaceOutput>(url, payload, this.logger);
         }
 
         public SpaceOutput CreateChildPage(string url, string payload)
