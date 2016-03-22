@@ -21,7 +21,7 @@ namespace ConfluenceAutomator.Library
 
         public ChildPagesOutput Execute(string id)
         {
-            return HttpClientHelper.Execute<ChildPagesOutput>(string.Format(AppSettingsHelper.GetValue("GetChildPagesUrl"), id), this.logger);
+            return HttpClientHelper.ExecuteGet<ChildPagesOutput>(string.Format(AppSettingsHelper.GetValue(Strings.GET_CHILDPAGES_URL), id), this.logger);
         }
     }
 }

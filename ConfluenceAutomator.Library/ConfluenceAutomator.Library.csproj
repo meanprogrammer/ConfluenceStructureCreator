@@ -63,6 +63,11 @@
     <Compile Include="Helper\MappingHelper.cs" />
     <Compile Include="Helper\StructureHelper.cs" />
     <Compile Include="Helper\TreeNodeHelper.cs" />
+    <Compile Include="Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Tasks\ConfluenceChildPagesTaskExecutor.cs" />
     <Compile Include="Tasks\ConfluencePageTreeTaskExecutor.cs" />
     <Compile Include="Tasks\ConfluenceSpaceTaskExecutor.cs" />
@@ -78,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

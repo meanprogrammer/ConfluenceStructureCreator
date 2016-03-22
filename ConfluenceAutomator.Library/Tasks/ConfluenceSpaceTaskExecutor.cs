@@ -24,23 +24,13 @@ namespace ConfluenceAutomator.Library
             this.logger = logger;
         }
 
-        static string credentials = string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
+        static string credentials = string.Format("{0}:{1}", 
+                AppSettingsHelper.GetValue(Strings.USERNAME_KEY), 
+                AppSettingsHelper.GetValue(Strings.PASSWORD_KEY));
+
         public AllSpaces Execute()
         {
-            /*
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(AppSettingsHelper.GetValue("CreateSpaceUrl"));
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            AllSpaces obj = JsonConvert.DeserializeObject<AllSpaces>(result);
-            return obj.results;
-            */
-            return HttpClientHelper.Execute<AllSpaces>(AppSettingsHelper.GetValue("CreateSpaceUrl"), string.Empty, this.logger);
+            return HttpClientHelper.Execute<AllSpaces>(AppSettingsHelper.GetValue(Strings.CREATE_SPACEURL_KEY), string.Empty, this.logger);
         }
 
         public TreeNode CreateSpaceTreeNode(Result space)
@@ -49,7 +39,7 @@ namespace ConfluenceAutomator.Library
             if (space == null)
                 return result;
 
-            string childUrl = AppSettingsHelper.GetValue("baseUrl") + space._expandable.homepage + "/child/page";
+            string childUrl = AppSettingsHelper.GetValue(Strings.BASEURL_KEY) + space._expandable.homepage + Strings.CHILDPAGE_PATH;
             var rootPages = HttpClientHelper.Execute<ChildPagesOutput>(childUrl, this.logger);
             CreateIndividualTreeNode(result, rootPages.results);
 
@@ -60,7 +50,7 @@ namespace ConfluenceAutomator.Library
         {
             foreach (var item in pages)
             {
-                string childUrl = AppSettingsHelper.GetValue("baseUrl") + string.Format("/rest/api/content/{0}/child/page", item.id);
+                string childUrl = AppSettingsHelper.GetValue(Strings.BASEURL_KEY) + string.Format("/rest/api/content/{0}/child/page", item.id);
 
                 ChildPagesOutput childPages = HttpClientHelper.Execute<ChildPagesOutput>(childUrl, credentials, this.logger);
 
@@ -80,14 +70,6 @@ namespace ConfluenceAutomator.Library
                     CreateIndividualTreeNode(currentTreeNode, childPages.results);
                 }
             }
-        }
-
-        private TreeNode CreateTreeNode(string text)
-        {
-            return new TreeNode(text);
-        }
-
-
- 
+        } 
     }
 }

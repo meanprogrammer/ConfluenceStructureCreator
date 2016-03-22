@@ -43,7 +43,7 @@
             this.RunButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.ConfluenceBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.ExtractButton = new System.Windows.Forms.Button();
+            this.CleanUpButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -188,22 +188,22 @@
             this.ConfluenceBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ConfluenceBackgroundWorker_DoWork);
             this.ConfluenceBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ConfluenceBackgroundWorker_RunWorkerCompleted);
             // 
-            // ExtractButton
+            // CleanUpButton
             // 
-            this.ExtractButton.Location = new System.Drawing.Point(13, 485);
-            this.ExtractButton.Name = "ExtractButton";
-            this.ExtractButton.Size = new System.Drawing.Size(89, 35);
-            this.ExtractButton.TabIndex = 11;
-            this.ExtractButton.Text = "Cleanup";
-            this.ExtractButton.UseVisualStyleBackColor = true;
-            this.ExtractButton.Click += new System.EventHandler(this.ExtractButton_Click);
+            this.CleanUpButton.Location = new System.Drawing.Point(8, 484);
+            this.CleanUpButton.Name = "CleanUpButton";
+            this.CleanUpButton.Size = new System.Drawing.Size(89, 40);
+            this.CleanUpButton.TabIndex = 11;
+            this.CleanUpButton.Text = "Cleanup";
+            this.CleanUpButton.UseVisualStyleBackColor = true;
+            this.CleanUpButton.Click += new System.EventHandler(this.ExtractButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 532);
-            this.Controls.Add(this.ExtractButton);
+            this.Controls.Add(this.CleanUpButton);
             this.Controls.Add(this.ConfluencetreeView);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.RunButton);
@@ -237,7 +237,7 @@
         private System.Windows.Forms.ComboBox ParentSpaceComboBox;
         private System.Windows.Forms.TreeView ConfluencetreeView;
         private System.ComponentModel.BackgroundWorker ConfluenceBackgroundWorker;
-        private System.Windows.Forms.Button ExtractButton;
+        private System.Windows.Forms.Button CleanUpButton;
     }
 }
 

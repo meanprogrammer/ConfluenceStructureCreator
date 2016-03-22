@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ConfluenceAutomator.Library;
 namespace ConfluenceAutomator.WinForms
 {
     public partial class MainForm : Form, IFormLogger
@@ -24,8 +24,8 @@ namespace ConfluenceAutomator.WinForms
             
             ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor(this);
             AllSpaces r = confSpaceService.Execute();
-            this.ParentSpaceComboBox.ValueMember = "key";
-            this.ParentSpaceComboBox.DisplayMember = "name";
+            this.ParentSpaceComboBox.ValueMember = Strings.KEY;
+            this.ParentSpaceComboBox.DisplayMember = Strings.NAME;
             this.ParentSpaceComboBox.DataSource = r.results;
 
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
@@ -45,8 +45,8 @@ namespace ConfluenceAutomator.WinForms
                 return;
             }
 
-            this.RunButton.Enabled = false;
-            this.CancelButton.Enabled = false;
+            FormIsWorking(false);
+
 
             var list = StructureConstant.GetTaxonomy();
 
@@ -65,7 +65,7 @@ namespace ConfluenceAutomator.WinForms
                     var fromCopy = TreeNodeHelper.GetFirstCheckedChild(found.Nodes);
                     //Here is the destination
                     var toCopy = map.ToPageTitle;
-                    var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), fromCopy.Text, mappings.FromSpace);
+                    var newContent = string.Format(AppSettingsHelper.GetValue(Strings.INCLUDE_PAGECONTENT_KEY), fromCopy.Text, mappings.FromSpace);
 
                     StructureHelper.AlterWithNewContent(list, toCopy, newContent);
 
@@ -92,12 +92,12 @@ namespace ConfluenceAutomator.WinForms
                         if (funcPage != null)
                         {
                             task.CreateChildPage(
-                                AppSettingsHelper.GetValue("CreatePageUrl"), 
+                                AppSettingsHelper.GetValue(Strings.CREATE_PAGE_URL_KEY), 
                                 JsonConvert.SerializeObject(
                                     task.CreateChildPageInstance(
                                             mappings.FromSpace, funcPage.id, 
                                             string.Format("{0} - {1}",this.NameTextBox.Text.Trim(), bMap.FromPageTitle),
-                                            string.Format(AppSettingsHelper.GetValue("includePageContent"), bMap.FromPageTitle, this.KeyTextbox.Text.Trim()
+                                            string.Format(AppSettingsHelper.GetValue(Strings.INCLUDE_PAGECONTENT_KEY), bMap.FromPageTitle, this.KeyTextbox.Text.Trim()
                                     )
                                 )));
                         }
@@ -109,11 +109,7 @@ namespace ConfluenceAutomator.WinForms
                 }
             }
 
-            
-           
-
-            this.RunButton.Enabled = true;
-            this.CancelButton.Enabled = true;
+            FormIsWorking(true);
         }
 
         public void Log(string message)
@@ -128,26 +124,8 @@ namespace ConfluenceAutomator.WinForms
 
         private void ParentSpaceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.ParentSpaceComboBox.Enabled = false;
-            this.RunButton.Enabled = false;
-            this.CancelButton.Enabled = false;
+            FormIsWorking(false);
 
-            var defaultSelected = this.ParentSpaceComboBox.SelectedItem as Result;
-            if (defaultSelected != null)
-            {
-                ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor();
-                PageByTitleAndKeyOutput page = task.GetPageByKeyAndTitle(defaultSelected.key, "PipelineBusinessCaseTitle");
-                if (page != null && page.results.Count == 1)
-                {
-                    ConfluenceChildPagesTaskExecutor bcChildren = new ConfluenceChildPagesTaskExecutor();
-                    List<ChildPagesOutput_Result> rs = bcChildren.Execute(page.results.FirstOrDefault().id).results;
-
-                    if (rs.Count < 1)
-                    {
-                        return;
-                    }
-                }
-            }
             this.ConfluencetreeView.Nodes.Clear();
             if (!ConfluenceBackgroundWorker.IsBusy)
             {
@@ -161,6 +139,23 @@ namespace ConfluenceAutomator.WinForms
             }
         }
 
+        private void FormIsWorking(bool enabled)
+        {
+            this.ParentSpaceComboBox.Enabled = enabled;
+            this.RunButton.Enabled = enabled;
+            this.CancelButton.Enabled = enabled;
+            this.CleanUpButton.Enabled = enabled;
+
+            string status = string.Empty;
+            status = ((enabled == false) ? "Work in progress." : "Work Complete.");
+            this.Log(status);
+        }
+
+        private void ClearLog()
+        {
+            this.LogTextbox.Clear();
+        }
+
         private void ConfluenceBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor(this);
@@ -170,26 +165,14 @@ namespace ConfluenceAutomator.WinForms
         private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.ConfluencetreeView.Nodes.Add(e.Result as TreeNode);
-            this.ParentSpaceComboBox.Enabled = true;
-            this.RunButton.Enabled = true;
-            this.CancelButton.Enabled = true;
+
+            FormIsWorking(true);
         }
 
         private void ExtractButton_Click(object sender, EventArgs e)
         {
             ChildDeleter deleter = new ChildDeleter(this);
             deleter.ExecuteDelete();
-        }
-
-        private void BuildMapping(TreeNodeCollection nodes, PageTreeItem item)
-        {
-            foreach (TreeNode tn in nodes)
-            {
-                if (tn.Checked == true)
-                { 
-
-                }
-            }
         }
 
     }

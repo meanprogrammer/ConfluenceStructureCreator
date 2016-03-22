@@ -15,8 +15,8 @@ namespace ConfluenceAutomator.Library
     public class ConfluencePageTreeTaskExecutor
     {
         static string credentials = string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
-        static string createSpaceUrl = AppSettingsHelper.GetValue("CreateSpaceUrl");
-        static string createPageUrl = AppSettingsHelper.GetValue("CreatePageUrl");
+        static string createSpaceUrl = AppSettingsHelper.GetValue(Strings.CREATE_SPACEURL_KEY);
+        static string createPageUrl = AppSettingsHelper.GetValue(Strings.CREATE_PAGE_URL_KEY);
 
         private List<ConfluencePage> structure;
         private IFormLogger logger;
@@ -49,7 +49,7 @@ namespace ConfluenceAutomator.Library
 
             logger.Log("Updating parent Space.");
 
-            var parentBusinessCase = GetPageByKeyAndTitle(parentKey, AppSettingsHelper.GetValue("ParentBusinessCaseTitle"));
+            var parentBusinessCase = GetPageByKeyAndTitle(parentKey, AppSettingsHelper.GetValue(Strings.PARENT_BUSINESS_CASE_TITLE_KEY));
             if (parentBusinessCase != null)
             {
                 if (parentBusinessCase.results.Count() == 1)
@@ -60,7 +60,7 @@ namespace ConfluenceAutomator.Library
 
                     int index = html.IndexOf("</ul>");
 
-                    var childBusinessCase = GetPageByKeyAndTitle(rootSpace.key, AppSettingsHelper.GetValue("ProjectBusinessCaseTitle"));
+                    var childBusinessCase = GetPageByKeyAndTitle(rootSpace.key, AppSettingsHelper.GetValue(Strings.PARENT_BUSINESS_CASE_TITLE_KEY));
                     string newHtml = html.Insert(index, string.Format(@"<li><a href='{0}'>{1}</a></li>", ExtractLinkFromChildBusinessCase(childBusinessCase), rootSpace.name));
 
                     UpdatePageInput p = new UpdatePageInput();
@@ -106,71 +106,24 @@ namespace ConfluenceAutomator.Library
 
         public UpdatePageOutput UpdateParentPage(string pageId, UpdatePageInput param)
         {
-            /*
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("UpdatePageUrl"), pageId));
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(JsonConvert.SerializeObject(param), UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.PutAsync(client.BaseAddress, content).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            */
-            //PageByTitleAndKeyResult obj = JsonConvert.DeserializeObject<PageByTitleAndKeyResult>(result);
-
-            string url = string.Format(AppSettingsHelper.GetValue("UpdatePageUrl"), pageId);
+            string url = string.Format(AppSettingsHelper.GetValue(Strings.UPDATEPAGE_URL_KEY), pageId);
             return HttpClientHelper.ExecutePut<UpdatePageOutput>(url, JsonConvert.SerializeObject(param), this.logger);
         }
 
         public PageByTitleAndKeyOutput GetPageByKeyAndTitle(string parentKey, string pageTitle)
         {
-            //var pageTitle = AppSettingsHelper.GetValue(appSettingsKey);
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(string.Format(AppSettingsHelper.GetValue("GetPageByTitleAndKeyUrl"), pageTitle, parentKey));
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            PageByTitleAndKeyOutput obj = JsonConvert.DeserializeObject<PageByTitleAndKeyOutput>(result);
-            return obj;
+            string url = string.Format(AppSettingsHelper.GetValue(Strings.GET_PAGEBY_TITLE_KEY_URL), pageTitle, parentKey);
+            return HttpClientHelper.ExecuteGet<PageByTitleAndKeyOutput>(url, this.logger);
         }
 
         private SpaceOutput ExecuteNonCurl(string url, string payload)
         {
-            /*
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(url);
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.PostAsync(url, content).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            SpaceOutput obj = JsonConvert.DeserializeObject<SpaceOutput>(result);
-            return obj;
-            */
             return HttpClientHelper.ExecutePost<SpaceOutput>(url, payload, this.logger);
         }
 
         public SpaceOutput CreateChildPage(string url, string payload)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(url);
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(credentials);
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.PostAsync(url, content).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            SpaceOutput obj = JsonConvert.DeserializeObject<SpaceOutput>(result);
-            return obj;
+            return HttpClientHelper.ExecutePost<SpaceOutput>(url, payload, this.logger);
         }
 
         public ChildPageInput CreateChildPageInstance(string key, string rootId, string title, string value)
