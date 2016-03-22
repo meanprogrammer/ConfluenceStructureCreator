@@ -161,7 +161,6 @@
             this.ConfluencetreeView.Name = "ConfluencetreeView";
             this.ConfluencetreeView.Size = new System.Drawing.Size(474, 512);
             this.ConfluencetreeView.TabIndex = 10;
-            this.ConfluencetreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ConfluencetreeView_NodeMouseDoubleClick);
             // 
             // RunButton
             // 

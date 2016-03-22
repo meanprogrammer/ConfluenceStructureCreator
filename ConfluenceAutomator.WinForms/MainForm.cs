@@ -175,11 +175,6 @@ namespace ConfluenceAutomator.WinForms
             this.CancelButton.Enabled = true;
         }
 
-        private void ConfluencetreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            MessageBox.Show(e.Node.Checked.ToString());
-        }
-
         private void ExtractButton_Click(object sender, EventArgs e)
         {
             ChildDeleter deleter = new ChildDeleter(this);
