@@ -63,11 +63,9 @@ namespace ConfluenceAutomator.WinForms
                 {
                     //Now we have the item to copy
                     var fromCopy = TreeNodeHelper.GetFirstCheckedChild(found.Nodes);
-                    var s = fromCopy.Text;
                     //Here is the destination
                     var toCopy = map.ToPageTitle;
-
-                    var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), s, "BPM");
+                    var newContent = string.Format(AppSettingsHelper.GetValue("includePageContent"), fromCopy.Text, mappings.FromSpace);
 
                     StructureHelper.AlterWithNewContent(list, toCopy, newContent);
 
