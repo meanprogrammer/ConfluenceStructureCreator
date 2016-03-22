@@ -30,9 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.LogTextbox = new System.Windows.Forms.TextBox();
-            this.PipelineBCcomboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.ParentSpaceComboBox = new System.Windows.Forms.ComboBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
@@ -51,9 +49,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.LogTextbox);
-            this.groupBox1.Controls.Add(this.PipelineBCcomboBox);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.ParentSpaceComboBox);
             this.groupBox1.Controls.Add(this.DescriptionTextBox);
@@ -70,38 +66,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Space Information ";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(22, 240);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 20);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "BC Page";
-            this.label5.Visible = false;
-            // 
             // LogTextbox
             // 
             this.LogTextbox.BackColor = System.Drawing.SystemColors.Control;
             this.LogTextbox.Enabled = false;
             this.LogTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogTextbox.Location = new System.Drawing.Point(5, 277);
+            this.LogTextbox.Location = new System.Drawing.Point(5, 236);
             this.LogTextbox.Multiline = true;
             this.LogTextbox.Name = "LogTextbox";
             this.LogTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LogTextbox.Size = new System.Drawing.Size(474, 193);
+            this.LogTextbox.Size = new System.Drawing.Size(474, 234);
             this.LogTextbox.TabIndex = 3;
-            // 
-            // PipelineBCcomboBox
-            // 
-            this.PipelineBCcomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PipelineBCcomboBox.FormattingEnabled = true;
-            this.PipelineBCcomboBox.Location = new System.Drawing.Point(129, 236);
-            this.PipelineBCcomboBox.Name = "PipelineBCcomboBox";
-            this.PipelineBCcomboBox.Size = new System.Drawing.Size(325, 32);
-            this.PipelineBCcomboBox.TabIndex = 8;
-            this.PipelineBCcomboBox.Visible = false;
             // 
             // label4
             // 
@@ -220,9 +195,8 @@
             this.ExtractButton.Name = "ExtractButton";
             this.ExtractButton.Size = new System.Drawing.Size(89, 35);
             this.ExtractButton.TabIndex = 11;
-            this.ExtractButton.Text = "Extract";
+            this.ExtractButton.Text = "Cleanup";
             this.ExtractButton.UseVisualStyleBackColor = true;
-            this.ExtractButton.Visible = false;
             this.ExtractButton.Click += new System.EventHandler(this.ExtractButton_Click);
             // 
             // MainForm
@@ -262,8 +236,6 @@
         private System.Windows.Forms.TextBox LogTextbox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox ParentSpaceComboBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox PipelineBCcomboBox;
         private System.Windows.Forms.TreeView ConfluencetreeView;
         private System.ComponentModel.BackgroundWorker ConfluenceBackgroundWorker;
         private System.Windows.Forms.Button ExtractButton;

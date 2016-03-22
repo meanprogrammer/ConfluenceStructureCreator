@@ -45,6 +45,11 @@ namespace ConfluenceAutomator.Library
             return Execute<T>(url, payload, string.Empty, WebMethod.PUT, logger);
         }
 
+        public static T ExecuteDelete<T>(string url, IFormLogger logger)
+        {
+            return Execute<T>(url, string.Empty, string.Empty, WebMethod.DELETE, logger);
+        }
+
         private static T Execute<T>(string url, string payload, string credential, WebMethod method, IFormLogger logger)
         {
             HttpClient client = new HttpClient();
@@ -80,6 +85,10 @@ namespace ConfluenceAutomator.Library
                 case WebMethod.PUT:
                     content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
                     message = client.PutAsync(client.BaseAddress, content).Result;
+                    result = message.Content.ReadAsStringAsync().Result;
+                    break;
+                case WebMethod.DELETE:
+                    message = client.DeleteAsync(client.BaseAddress).Result;
                     result = message.Content.ReadAsStringAsync().Result;
                     break;
                 default:

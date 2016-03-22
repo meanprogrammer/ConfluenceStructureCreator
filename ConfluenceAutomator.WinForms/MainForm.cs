@@ -146,12 +146,6 @@ namespace ConfluenceAutomator.WinForms
                     {
                         return;
                     }
-                    else
-                    {
-                        this.PipelineBCcomboBox.ValueMember = "id";
-                        this.PipelineBCcomboBox.DisplayMember = "title";
-                        this.PipelineBCcomboBox.DataSource = rs;
-                    }
                 }
             }
             this.ConfluencetreeView.Nodes.Clear();
@@ -188,14 +182,8 @@ namespace ConfluenceAutomator.WinForms
 
         private void ExtractButton_Click(object sender, EventArgs e)
         {
-            var nodes = this.ConfluencetreeView.Nodes;
-            foreach (TreeNode tn in nodes)
-            {
-                if (tn.Checked == true)
-                {
-          
-                }
-            }
+            ChildDeleter deleter = new ChildDeleter(this);
+            deleter.ExecuteDelete();
         }
 
         private void BuildMapping(TreeNodeCollection nodes, PageTreeItem item)
