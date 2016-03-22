@@ -171,8 +171,10 @@ namespace ConfluenceAutomator.WinForms
 
         private void ExtractButton_Click(object sender, EventArgs e)
         {
+            FormIsWorking(false);
             ChildDeleter deleter = new ChildDeleter(this);
             deleter.ExecuteDelete();
+            FormIsWorking(true);
         }
 
     }
