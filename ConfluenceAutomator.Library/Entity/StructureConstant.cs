@@ -258,9 +258,15 @@ namespace ConfluenceAutomator.Library
                 {
                     childList.Add(tn2.Tag as ConfluencePage);
                 }
-
-                
+                ConfluencePage cp = tn.Tag as ConfluencePage;
+                if (cp != null)
+                {
+                    cp.ChildPages.Clear();
+                    cp.ChildPages.AddRange(childList);
+                    masterList.Add(cp);
+                }
             }
+            return masterList;
         }
     }
 
