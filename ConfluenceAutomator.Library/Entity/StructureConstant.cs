@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ConfluenceAutomator.Library
 {
     public class StructureConstant
     {
+
+        #region old_structure
         public static Dictionary<string, List<string>> GetStructure()
         {
             Dictionary<string, List<string>> list = new Dictionary<string, List<string>>();
@@ -105,9 +108,7 @@ namespace ConfluenceAutomator.Library
 
             return list;
         }
-
-
-
+        #endregion
 
         public static List<ConfluencePage> GetTaxonomy()
         {
@@ -115,8 +116,9 @@ namespace ConfluenceAutomator.Library
             var a = new ConfluencePage();
             a.Title = "0. Planning Phase";
             a.Content = ConstantContent.DISPLAY_CHILDREN_MARKUP;
+            a.HasAttachmentWidget = true;
             a.ChildPages.Add(new ConfluencePage() { Title = "0.01 Concept Paper", Content = string.Empty });
-            a.ChildPages.Add(new ConfluencePage() { Title = "0.02 Business Case", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
+            a.ChildPages.Add(new ConfluencePage() { Title = "0.02 Business Case", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
             a.ChildPages.Add(new ConfluencePage() { Title = "0.03 High-level Process and Vision Design", Content = string.Empty });
             a.ChildPages.Add(new ConfluencePage() { Title = "0.04 High Level Solutions Design", Content = string.Empty });
             a.ChildPages.Add(new ConfluencePage() { Title = "0.05 SDLC Activities and Deliverables Checklist", Content = string.Empty });
@@ -128,20 +130,20 @@ namespace ConfluenceAutomator.Library
             var b = new ConfluencePage();
             b.Title = "1. Operations Analysis Phase";
             b.Content = ConstantContent.DISPLAY_CHILDREN_MARKUP;
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.01 Functional Requirements", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.02 Non-Functional Requirements", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.03 Mockups/Prototypes", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.04 Detailed Use Case Specifications", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.05 Information Models", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.06 Security Profiles", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.07 Gap Analysis", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.08 Application and Infrastructure Design", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.09 Project Master Test Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.10 Data Conversion Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.11 Business Change Management Strategy", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.12 Needs Analysis", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.13 High-level Solution Deployment Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
-            b.ChildPages.Add(new ConfluencePage() { Title = "1.14 Transition and Maintenance Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP) });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.01 Functional Requirements", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.02 Non-Functional Requirements", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.03 Mockups/Prototypes", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.04 Detailed Use Case Specifications", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.05 Information Models", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.06 Security Profiles", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.07 Gap Analysis", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.08 Application and Infrastructure Design", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.09 Project Master Test Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.10 Data Conversion Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.11 Business Change Management Strategy", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.12 Needs Analysis", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.13 High-level Solution Deployment Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
+            b.ChildPages.Add(new ConfluencePage() { Title = "1.14 Transition and Maintenance Plan", Content = string.Format("{0}{1}", ConstantContent.FILE_LIST_MARKUP, ConstantContent.CONTRIBUTOR_MARKUP), HasAttachmentWidget = true, HasContributorSummaryWidget = true });
             list.Add(b);
             
             var c = new ConfluencePage();
@@ -223,6 +225,43 @@ namespace ConfluenceAutomator.Library
             
             return list;
         }
+
+        public static TreeNode GetStructureAsTreeNode()
+        {
+            TreeNode tn = new TreeNode("Target Space");
+
+            var list = GetTaxonomy();
+
+            foreach (ConfluencePage c in list)
+            {
+                TreeNode fNode = new TreeNode(c.Title);
+                fNode.Tag = c;
+                foreach (ConfluencePage cc in c.ChildPages)
+                {
+                    TreeNode tnc = new TreeNode(cc.Title);
+                    tnc.Tag = cc;
+                    fNode.Nodes.Add(tnc);
+                }
+                tn.Nodes.Add(fNode);
+            }
+
+            return tn;
+        }
+
+        public static List<ConfluencePage> ExtractFromTreeView(TreeNode treeNode)
+        {
+            List<ConfluencePage> masterList = new List<ConfluencePage>();
+            foreach (TreeNode tn in treeNode.Nodes)
+            {
+                List<ConfluencePage> childList = new List<ConfluencePage>();
+                foreach (TreeNode tn2 in tn.Nodes)
+                {
+                    childList.Add(tn2.Tag as ConfluencePage);
+                }
+
+                
+            }
+        }
     }
 
     public class ConfluencePage
@@ -230,7 +269,8 @@ namespace ConfluenceAutomator.Library
         public ConfluencePage() { this.ChildPages = new List<ConfluencePage>(); }
         public string Title { get; set; }
         public string Content { get; set; }
-
+        public bool HasAttachmentWidget { get; set; }
+        public bool HasContributorSummaryWidget { get; set; }
         public List<ConfluencePage> ChildPages { get; set; }
     }
 }

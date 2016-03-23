@@ -44,7 +44,17 @@
             this.CancelButton = new System.Windows.Forms.Button();
             this.ConfluenceBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.CleanUpButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.TargetSpaceTreeView = new System.Windows.Forms.TreeView();
+            this.ColapseExpandButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.HasContributorcheckBox = new System.Windows.Forms.CheckBox();
+            this.HasAttachmentcheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -157,14 +167,15 @@
             // ConfluencetreeView
             // 
             this.ConfluencetreeView.CheckBoxes = true;
-            this.ConfluencetreeView.Location = new System.Drawing.Point(499, 12);
+            this.ConfluencetreeView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfluencetreeView.Location = new System.Drawing.Point(16, 28);
             this.ConfluencetreeView.Name = "ConfluencetreeView";
-            this.ConfluencetreeView.Size = new System.Drawing.Size(474, 512);
+            this.ConfluencetreeView.Size = new System.Drawing.Size(419, 442);
             this.ConfluencetreeView.TabIndex = 10;
             // 
             // RunButton
             // 
-            this.RunButton.Location = new System.Drawing.Point(313, 484);
+            this.RunButton.Location = new System.Drawing.Point(499, 484);
             this.RunButton.Name = "RunButton";
             this.RunButton.Size = new System.Drawing.Size(88, 40);
             this.RunButton.TabIndex = 1;
@@ -174,7 +185,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(407, 484);
+            this.CancelButton.Location = new System.Drawing.Point(593, 484);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(88, 40);
             this.CancelButton.TabIndex = 2;
@@ -198,17 +209,96 @@
             this.CleanUpButton.UseVisualStyleBackColor = true;
             this.CleanUpButton.Click += new System.EventHandler(this.ExtractButton_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ConfluencetreeView);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(499, 2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(451, 476);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = " Parent Space ";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.TargetSpaceTreeView);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(956, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(451, 476);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = " Target Space ";
+            // 
+            // TargetSpaceTreeView
+            // 
+            this.TargetSpaceTreeView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TargetSpaceTreeView.HideSelection = false;
+            this.TargetSpaceTreeView.Location = new System.Drawing.Point(16, 28);
+            this.TargetSpaceTreeView.Name = "TargetSpaceTreeView";
+            this.TargetSpaceTreeView.Size = new System.Drawing.Size(419, 442);
+            this.TargetSpaceTreeView.TabIndex = 10;
+            this.TargetSpaceTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TargetSpaceTreeView_AfterSelect);
+            // 
+            // ColapseExpandButton
+            // 
+            this.ColapseExpandButton.Location = new System.Drawing.Point(916, 485);
+            this.ColapseExpandButton.Name = "ColapseExpandButton";
+            this.ColapseExpandButton.Size = new System.Drawing.Size(33, 39);
+            this.ColapseExpandButton.TabIndex = 14;
+            this.ColapseExpandButton.Text = "<<";
+            this.ColapseExpandButton.UseVisualStyleBackColor = true;
+            this.ColapseExpandButton.Click += new System.EventHandler(this.ColapseExpandButton_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.HasContributorcheckBox);
+            this.groupBox4.Controls.Add(this.HasAttachmentcheckBox);
+            this.groupBox4.Location = new System.Drawing.Point(956, 478);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(451, 46);
+            this.groupBox4.TabIndex = 15;
+            this.groupBox4.TabStop = false;
+            // 
+            // HasContributorcheckBox
+            // 
+            this.HasContributorcheckBox.AutoSize = true;
+            this.HasContributorcheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HasContributorcheckBox.Location = new System.Drawing.Point(188, 14);
+            this.HasContributorcheckBox.Name = "HasContributorcheckBox";
+            this.HasContributorcheckBox.Size = new System.Drawing.Size(211, 24);
+            this.HasContributorcheckBox.TabIndex = 1;
+            this.HasContributorcheckBox.Text = "Has Contributor Summary";
+            this.HasContributorcheckBox.UseVisualStyleBackColor = true;
+            this.HasContributorcheckBox.CheckedChanged += new System.EventHandler(this.HasContributorcheckBox_CheckedChanged);
+            // 
+            // HasAttachmentcheckBox
+            // 
+            this.HasAttachmentcheckBox.AutoSize = true;
+            this.HasAttachmentcheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HasAttachmentcheckBox.Location = new System.Drawing.Point(16, 14);
+            this.HasAttachmentcheckBox.Name = "HasAttachmentcheckBox";
+            this.HasAttachmentcheckBox.Size = new System.Drawing.Size(144, 24);
+            this.HasAttachmentcheckBox.TabIndex = 0;
+            this.HasAttachmentcheckBox.Text = "Has Attachment";
+            this.HasAttachmentcheckBox.UseVisualStyleBackColor = true;
+            this.HasAttachmentcheckBox.CheckedChanged += new System.EventHandler(this.HasAttachmentcheckBox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(985, 532);
+            this.ClientSize = new System.Drawing.Size(1416, 530);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.ColapseExpandButton);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.CleanUpButton);
-            this.Controls.Add(this.ConfluencetreeView);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.RunButton);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
@@ -217,6 +307,10 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +332,13 @@
         private System.Windows.Forms.TreeView ConfluencetreeView;
         private System.ComponentModel.BackgroundWorker ConfluenceBackgroundWorker;
         private System.Windows.Forms.Button CleanUpButton;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TreeView TargetSpaceTreeView;
+        private System.Windows.Forms.Button ColapseExpandButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox HasAttachmentcheckBox;
+        private System.Windows.Forms.CheckBox HasContributorcheckBox;
     }
 }
 

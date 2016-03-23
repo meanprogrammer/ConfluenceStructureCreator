@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ConfluenceAutomator.Library;
 namespace ConfluenceAutomator.WinForms
 {
     public partial class MainForm : Form, IFormLogger
@@ -29,6 +28,10 @@ namespace ConfluenceAutomator.WinForms
             this.ParentSpaceComboBox.DataSource = r.results;
 
             ParentSpaceComboBox_SelectedIndexChanged(sender, e);
+
+            this.TargetSpaceTreeView.Nodes.Add(StructureConstant.GetStructureAsTreeNode());
+            this.TargetSpaceTreeView.ExpandAll();
+            this.TargetSpaceTreeView.Nodes[0].EnsureVisible();
         }
 
         private void RunButton_Click(object sender, EventArgs e)
@@ -112,6 +115,7 @@ namespace ConfluenceAutomator.WinForms
             FormIsWorking(true);
         }
 
+
         public void Log(string message)
         {
             this.LogTextbox.AppendText(message + Environment.NewLine);
@@ -165,7 +169,6 @@ namespace ConfluenceAutomator.WinForms
         private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.ConfluencetreeView.Nodes.Add(e.Result as TreeNode);
-
             FormIsWorking(true);
         }
 
@@ -175,6 +178,50 @@ namespace ConfluenceAutomator.WinForms
             ChildDeleter deleter = new ChildDeleter(this);
             deleter.ExecuteDelete();
             FormIsWorking(true);
+        }
+
+        private void ColapseExpandButton_Click(object sender, EventArgs e)
+        {
+            if (((Button)sender).Text == "<<")
+            {
+                this.Width = this.Width - 460;
+                ((Button)sender).Text = ">>";
+            }
+            else
+            {
+                this.Width = this.Width + 460;
+                ((Button)sender).Text = "<<";
+            }
+        }
+
+        private void TargetSpaceTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            ConfluencePage cp = e.Node.Tag as ConfluencePage;
+            if (cp != null)
+            {
+                this.HasContributorcheckBox.Checked = cp.HasContributorSummaryWidget;
+                this.HasAttachmentcheckBox.Checked = cp.HasAttachmentWidget;
+            }
+        }
+
+        private void HasAttachmentcheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var selectedNode = this.TargetSpaceTreeView.SelectedNode;
+            ConfluencePage cp = selectedNode.Tag as ConfluencePage;
+            if (cp != null)
+            {
+                ((ConfluencePage)selectedNode.Tag).HasAttachmentWidget = ((CheckBox)sender).Checked;
+            }
+        }
+
+        private void HasContributorcheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var selectedNode = this.TargetSpaceTreeView.SelectedNode;
+            ConfluencePage cp = selectedNode.Tag as ConfluencePage;
+            if (cp != null)
+            {
+                ((ConfluencePage)selectedNode.Tag).HasContributorSummaryWidget = ((CheckBox)sender).Checked;
+            }
         }
 
     }
