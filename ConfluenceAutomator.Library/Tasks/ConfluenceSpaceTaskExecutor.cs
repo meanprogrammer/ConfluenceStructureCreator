@@ -40,7 +40,7 @@ namespace ConfluenceAutomator.Library
                 return result;
 
             string childUrl = AppSettingsHelper.GetValue(Strings.BASEURL_KEY) + space._expandable.homepage + Strings.CHILDPAGE_PATH;
-            var rootPages = HttpClientHelper.Execute<ChildPagesOutput>(childUrl, this.logger);
+            var rootPages = HttpClientHelper.ExecuteGet<ChildPagesOutput>(childUrl, this.logger);
             CreateIndividualTreeNode(result, rootPages.results);
 
             return result;

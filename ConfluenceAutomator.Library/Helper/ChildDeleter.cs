@@ -11,6 +11,7 @@ namespace ConfluenceAutomator.Library
         const string PARENT_SPACE = "BPM";
         const string PARENT_TITLE = "1. Operations Analysis Phase";
         const string DELETE_URL = "http://ldconfluence01.asiandevbank.org:8090/rest/api/content/{0}";
+        //const string DELETE_URL = "http://lpconfluence01.asiandevbank.org:8080/rest/api/content/{0}";
 
         private IFormLogger logger;
 
@@ -31,7 +32,6 @@ namespace ConfluenceAutomator.Library
             foreach (var c in children.results)
             {
                 ChildPagesOutput children2 = childPagesTask.Execute(c.id);
-
                 foreach (var c2 in children2.results)
                 {
                     HttpClientHelper.ExecuteDelete<string>(string.Format(DELETE_URL, c2.id), this.logger);

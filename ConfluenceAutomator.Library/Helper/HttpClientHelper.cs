@@ -64,8 +64,8 @@ namespace ConfluenceAutomator.Library
             byte[] cred = UTF8Encoding.UTF8.GetBytes(credential);
 
             //this is default
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Strings.BASIC, Convert.ToBase64String(cred));
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(Strings.APPLICATION_JSON));
 
             System.Net.Http.HttpContent content;
             HttpResponseMessage message;
@@ -73,17 +73,17 @@ namespace ConfluenceAutomator.Library
             switch (method)
             {
                 case WebMethod.POST:
-                    content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
+                    content = CreateStringContent(payload);
                     message = client.PostAsync(url, content).Result;
                     result = message.Content.ReadAsStringAsync().Result;
                     break;
                 case WebMethod.GET:
-                    content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
+                    content = CreateStringContent(string.Empty);
                     message = client.GetAsync(client.BaseAddress).Result;
                     result = message.Content.ReadAsStringAsync().Result;
                     break;
                 case WebMethod.PUT:
-                    content = new StringContent(payload, UTF8Encoding.UTF8, "application/json");
+                    content = CreateStringContent(payload);
                     message = client.PutAsync(client.BaseAddress, content).Result;
                     result = message.Content.ReadAsStringAsync().Result;
                     break;
@@ -92,28 +92,26 @@ namespace ConfluenceAutomator.Library
                     result = message.Content.ReadAsStringAsync().Result;
                     break;
                 default:
-                    content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
+                    content = CreateStringContent(string.Empty);
                     message = client.GetAsync(client.BaseAddress).Result;
                     result = message.Content.ReadAsStringAsync().Result;
                     break;
             }
+
+            if (!message.IsSuccessStatusCode)
+            {
+                logger.Log(string.Format("Error Occured : {0}", message.ReasonPhrase));
+                logger.Log(string.Format("Error Request Uri : {0}", message.RequestMessage.RequestUri.AbsoluteUri));
+                return default(T);
+            }
+
             T obj = JsonConvert.DeserializeObject<T>(result);
             return obj;
         }
 
-        public static T Execute<T>(string url, IFormLogger logger)
+        private static StringContent CreateStringContent(string param)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(url);
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(GetFormattedCredentials());
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            T obj = JsonConvert.DeserializeObject<T>(result);
-            return obj;
+            return new StringContent(param, UTF8Encoding.UTF8, Strings.APPLICATION_JSON);
         }
     }
 }
