@@ -92,8 +92,6 @@ namespace ConfluenceAutomator.WinForms
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(updatedList, this);
 
-            //ChildPagesOutput_Result bc = this.PipelineBCcomboBox.SelectedItem as ChildPagesOutput_Result;
-
             task.Execute(this, this.NameTextBox.Text, this.KeyTextbox.Text, this.DescriptionTextBox.Text, this.ParentSpaceComboBox.SelectedValue.ToString());
 
 
