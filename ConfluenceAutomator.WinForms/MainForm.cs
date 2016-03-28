@@ -199,6 +199,8 @@ namespace ConfluenceAutomator.WinForms
         private void ConfluenceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.ConfluencetreeView.Nodes.Add(e.Result as TreeNode);
+            this.ConfluencetreeView.ExpandAll();
+            this.ConfluencetreeView.Nodes[0].EnsureVisible();
             FormIsWorking(true);
         }
 
@@ -229,8 +231,15 @@ namespace ConfluenceAutomator.WinForms
             ConfluencePage cp = e.Node.Tag as ConfluencePage;
             if (cp != null)
             {
+                this.HasAttachmentcheckBox.Enabled = true;
+                this.HasContributorcheckBox.Enabled = true;
                 this.HasContributorcheckBox.Checked = cp.HasContributorSummaryWidget;
                 this.HasAttachmentcheckBox.Checked = cp.HasAttachmentWidget;
+            }
+            else
+            {
+                this.HasAttachmentcheckBox.Enabled = false;
+                this.HasContributorcheckBox.Enabled = false;
             }
         }
 
