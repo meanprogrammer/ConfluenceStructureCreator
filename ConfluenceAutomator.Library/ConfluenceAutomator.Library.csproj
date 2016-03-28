@@ -78,7 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\PageByTitleAndKeyOutput.cs" />
     <Compile Include="Entity\SpaceOutput.cs" />
-    <Compile Include="Entity\StructureConstant.cs" />
+    <Compile Include="Helper\StructureConstant.cs" />
     <Compile Include="Entity\UpdatePageInput.cs" />
   </ItemGroup>
   <ItemGroup>

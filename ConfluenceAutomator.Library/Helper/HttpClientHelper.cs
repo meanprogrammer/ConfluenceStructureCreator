@@ -15,21 +15,6 @@ namespace ConfluenceAutomator.Library
             return string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
         }
 
-        public static T Execute<T>(string url, string credentials, IFormLogger logger)
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new System.Uri(url);
-            byte[] cred = UTF8Encoding.UTF8.GetBytes(GetFormattedCredentials());
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            System.Net.Http.HttpContent content = new StringContent(string.Empty, UTF8Encoding.UTF8, "application/json");
-            HttpResponseMessage messge = client.GetAsync(client.BaseAddress).Result;
-            string result = messge.Content.ReadAsStringAsync().Result;
-            T obj = JsonConvert.DeserializeObject<T>(result);
-            return obj;
-        }
-
         public static T ExecuteGet<T>(string url, IFormLogger logger)
         {
             return Execute<T>(url, string.Empty, string.Empty, WebMethod.GET, logger);

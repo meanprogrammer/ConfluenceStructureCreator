@@ -30,7 +30,7 @@ namespace ConfluenceAutomator.Library
 
         public AllSpaces Execute()
         {
-            return HttpClientHelper.Execute<AllSpaces>(AppSettingsHelper.GetValue(Strings.CREATE_SPACEURL_KEY), string.Empty, this.logger);
+            return HttpClientHelper.ExecuteGet<AllSpaces>(AppSettingsHelper.GetValue(Strings.CREATE_SPACEURL_KEY), this.logger);
         }
 
         public TreeNode CreateSpaceTreeNode(Result space)
@@ -52,7 +52,7 @@ namespace ConfluenceAutomator.Library
             {
                 string childUrl = AppSettingsHelper.GetValue(Strings.BASEURL_KEY) + string.Format("/rest/api/content/{0}/child/page", item.id);
 
-                ChildPagesOutput childPages = HttpClientHelper.Execute<ChildPagesOutput>(childUrl, credentials, this.logger);
+                ChildPagesOutput childPages = HttpClientHelper.ExecuteGet<ChildPagesOutput>(childUrl, this.logger);
 
                 TreeNode newNode = new TreeNode();
                 newNode.Text = item.title;

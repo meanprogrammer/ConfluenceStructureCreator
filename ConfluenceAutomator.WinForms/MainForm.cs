@@ -53,10 +53,23 @@ namespace ConfluenceAutomator.WinForms
 
             var list = StructureConstant.GetTaxonomy();
 
+            var updatedList = StructureConstant.ExtractFromTreeView(this.TargetSpaceTreeView.Nodes[0]);
+
+            foreach (ConfluencePage item in updatedList)
+            {
+                UpdateContent(item);
+                foreach (var cp in item.ChildPages)
+                {
+                    UpdateContent(cp);
+                }
+            }
+
             /* START THE COPY PROCESS */
 
             PageTreeMapping mappings = MappingHelper.GetMapping(this.KeyTextbox.Text.Trim());
 
+
+            /* LINKING BPM TO THE CREATED SPACE */
             foreach (PageTreeMappingItem map in mappings.Mappings)
             {
                 //Find it on the tree
@@ -70,14 +83,14 @@ namespace ConfluenceAutomator.WinForms
                     var toCopy = map.ToPageTitle;
                     var newContent = string.Format(AppSettingsHelper.GetValue(Strings.INCLUDE_PAGECONTENT_KEY), fromCopy.Text, mappings.FromSpace);
 
-                    StructureHelper.AlterWithNewContent(list, toCopy, newContent);
+                    StructureHelper.AlterWithNewContent(updatedList, toCopy, newContent);
 
                 }
             }
 
             
 
-            ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(list, this);
+            ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(updatedList, this);
 
             //ChildPagesOutput_Result bc = this.PipelineBCcomboBox.SelectedItem as ChildPagesOutput_Result;
 
@@ -113,6 +126,23 @@ namespace ConfluenceAutomator.WinForms
             }
 
             FormIsWorking(true);
+        }
+
+        private void UpdateContent(ConfluencePage item)
+        {
+            StringBuilder content = new StringBuilder();
+            if (item.HasAttachmentWidget)
+            {
+                content.Append(ConstantContent.FILE_LIST_MARKUP);
+                content.Append("<br/>");
+            }
+
+            if (item.HasContributorSummaryWidget)
+            {
+                content.Append(ConstantContent.CONTRIBUTOR_MARKUP);
+            }
+            item.Content = content.ToString();
+            //return item;
         }
 
 
@@ -223,6 +253,5 @@ namespace ConfluenceAutomator.WinForms
                 ((ConfluencePage)selectedNode.Tag).HasContributorSummaryWidget = ((CheckBox)sender).Checked;
             }
         }
-
     }
 }
