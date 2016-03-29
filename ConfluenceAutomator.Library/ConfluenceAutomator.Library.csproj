@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\AllSpaces.cs" />
+    <Compile Include="Helper\ConfluenceContext.cs" />
     <Compile Include="Entity\Method.cs" />
     <Compile Include="Entity\PageTreeItem.cs" />
     <Compile Include="Entity\PageTreeMapping.cs" />

@@ -151,7 +151,11 @@ namespace ConfluenceAutomator.WinForms
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show(Strings.ARE_YOU_SURE_1, Strings.EXIT_CONFIRMATION, MessageBoxButtons.YesNo);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void ParentSpaceComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -259,6 +263,11 @@ namespace ConfluenceAutomator.WinForms
             {
                 ((ConfluencePage)selectedNode.Tag).HasContributorSummaryWidget = ((CheckBox)sender).Checked;
             }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

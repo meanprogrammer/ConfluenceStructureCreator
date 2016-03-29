@@ -12,7 +12,7 @@ namespace ConfluenceAutomator.Library
     {
         private static string GetFormattedCredentials()
         {
-            return string.Format("{0}:{1}", AppSettingsHelper.GetValue("username"), AppSettingsHelper.GetValue("password"));
+            return ConfluenceContext.GetFormattedCredential();
         }
 
         public static T ExecuteGet<T>(string url, IFormLogger logger)

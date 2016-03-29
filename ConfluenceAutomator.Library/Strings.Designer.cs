@@ -70,6 +70,15 @@ namespace ConfluenceAutomator.Library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to exit this application?.
+        /// </summary>
+        public static string ARE_YOU_SURE_1 {
+            get {
+                return ResourceManager.GetString("ARE_YOU_SURE_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to baseUrl.
         /// </summary>
         public static string BASEURL_KEY {
@@ -115,6 +124,15 @@ namespace ConfluenceAutomator.Library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit Confirmation.
+        /// </summary>
+        public static string EXIT_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("EXIT_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GetChildPagesUrl.
         /// </summary>
         public static string GET_CHILDPAGES_URL {
@@ -142,11 +160,29 @@ namespace ConfluenceAutomator.Library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You entered a invalid credentials..
+        /// </summary>
+        public static string INVALID_CREDENTIALS {
+            get {
+                return ResourceManager.GetString("INVALID_CREDENTIALS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to key.
         /// </summary>
         public static string KEY {
             get {
                 return ResourceManager.GetString("KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login Error.
+        /// </summary>
+        public static string LOGIN_ERROR {
+            get {
+                return ResourceManager.GetString("LOGIN_ERROR", resourceCulture);
             }
         }
         

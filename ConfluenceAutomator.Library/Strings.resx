@@ -120,6 +120,9 @@
   <data name="APPLICATION_JSON" xml:space="preserve">
     <value>application/json</value>
   </data>
+  <data name="ARE_YOU_SURE_1" xml:space="preserve">
+    <value>Are you sure to exit this application?</value>
+  </data>
   <data name="BASEURL_KEY" xml:space="preserve">
     <value>baseUrl</value>
   </data>
@@ -135,6 +138,9 @@
   <data name="CREATE_SPACEURL_KEY" xml:space="preserve">
     <value>CreateSpaceUrl</value>
   </data>
+  <data name="EXIT_CONFIRMATION" xml:space="preserve">
+    <value>Exit Confirmation</value>
+  </data>
   <data name="GET_CHILDPAGES_URL" xml:space="preserve">
     <value>GetChildPagesUrl</value>
   </data>
@@ -144,8 +150,14 @@
   <data name="INCLUDE_PAGECONTENT_KEY" xml:space="preserve">
     <value>includePageContent</value>
   </data>
+  <data name="INVALID_CREDENTIALS" xml:space="preserve">
+    <value>You entered a invalid credentials.</value>
+  </data>
   <data name="KEY" xml:space="preserve">
     <value>key</value>
+  </data>
+  <data name="LOGIN_ERROR" xml:space="preserve">
+    <value>Login Error</value>
   </data>
   <data name="NAME" xml:space="preserve">
     <value>name</value>
