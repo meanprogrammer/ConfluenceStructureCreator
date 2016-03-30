@@ -30,6 +30,7 @@ namespace ConfluenceAutomator.WebClient
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
             ConfluenceContext.SaveCredentials("vd2", "Welcome2");
 
             var list = StructureConstant.GetTaxonomy();
@@ -67,6 +68,7 @@ namespace ConfluenceAutomator.WebClient
                     }
                 }
             }
+            */
         }
 
         public void Log(string message)

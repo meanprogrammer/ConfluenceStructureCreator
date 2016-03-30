@@ -16,6 +16,15 @@ namespace ConfluenceAutomator.API.Controllers
         [HttpGet, Route("api/ConfluenceStructure")]
         public IHttpActionResult Get()
         {
+            CreateParameter p = new CreateParameter();
+            p.Title = "TST 101";
+            p.Description = "The Description";
+            p.ParentKey = "BPM";
+            p.Key = "TS9";
+
+            string json = JsonConvert.SerializeObject(p);
+
+
             ConfluenceContext.SaveCredentials("vd2", "Welcome2");
 
             var list = StructureConstant.GetTaxonomy();
@@ -64,8 +73,9 @@ namespace ConfluenceAutomator.API.Controllers
         }
 
         // POST: api/ConfluenceStructure
-        [HttpPost, Route("api/ConfluenceStructure")]
-        public IHttpActionResult Post(CreateParameter p)
+        [HttpPost]
+        [Route("api/ConfluenceStructure/post")]
+        public IHttpActionResult Post([FromBody]CreateParameter data)
         {
             ConfluenceContext.SaveCredentials("vd2", "Welcome2");
 
@@ -73,9 +83,9 @@ namespace ConfluenceAutomator.API.Controllers
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(list, this);
 
-            task.Execute(this, p.Title, p.Key, p.Description, p.ParentKey);
+            task.Execute(this, data.Title, data.Key, data.Description, data.ParentKey);
 
-            PageTreeMapping mappings = MappingHelper.GetMapping(p.Key, true);
+            PageTreeMapping mappings = MappingHelper.GetMapping(data.Key, true);
 
             foreach (BackwardPageTreeMapping bMap in mappings.BackwardMappings)
             {
@@ -92,8 +102,8 @@ namespace ConfluenceAutomator.API.Controllers
                                 JsonConvert.SerializeObject(
                                     task.CreateChildPageInstance(
                                             mappings.FromSpace, funcPage.id,
-                                            string.Format("{0} - {1}", p.Title, bMap.FromPageTitle),
-                                            string.Format(AppSettingsHelper.GetValue(Strings.INCLUDE_PAGECONTENT_KEY), bMap.FromPageTitle, p.Key
+                                            string.Format("{0} - {1}", data.Title, bMap.FromPageTitle),
+                                            string.Format(AppSettingsHelper.GetValue(Strings.INCLUDE_PAGECONTENT_KEY), bMap.FromPageTitle, data.Key
                                     )
                                 )));
                         }
