@@ -66,7 +66,7 @@ namespace ConfluenceAutomator.WinForms
 
             /* START THE COPY PROCESS */
 
-            PageTreeMapping mappings = MappingHelper.GetMapping(this.KeyTextbox.Text.Trim());
+            PageTreeMapping mappings = MappingHelper.GetMapping(this.KeyTextbox.Text.Trim(), false);
 
 
             /* LINKING BPM TO THE CREATED SPACE */
@@ -140,7 +140,6 @@ namespace ConfluenceAutomator.WinForms
                 content.Append(ConstantContent.CONTRIBUTOR_MARKUP);
             }
             item.Content = content.ToString();
-            //return item;
         }
 
 
