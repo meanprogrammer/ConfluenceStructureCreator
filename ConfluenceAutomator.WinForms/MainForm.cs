@@ -110,7 +110,7 @@ namespace ConfluenceAutomator.WinForms
                                 JsonConvert.SerializeObject(
                                     task.CreateChildPageInstance(
                                             mappings.FromSpace, funcPage.id, 
-                                            string.Format("{0} - {1}",this.NameTextBox.Text.Trim(), bMap.FromPageTitle),
+                                            string.Format("{0} - {1}",this.KeyTextbox.Text.Trim(), bMap.FromPageTitle),
                                             string.Format(AppSettingsHelper.GetValue(Strings.INCLUDE_PAGECONTENT_KEY), bMap.FromPageTitle, this.KeyTextbox.Text.Trim()
                                     )
                                 )));
