@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Oxygen-Icons.org-Oxygen-Apps-preferences-plugin-script.ico" />
+    <Content Include="TargetSpace.xml" />
     <Content Include="TreeMappings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
