@@ -51,6 +51,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.HasContributorcheckBox = new System.Windows.Forms.CheckBox();
             this.HasAttachmentcheckBox = new System.Windows.Forms.CheckBox();
+            this.ExistingSpaceslistBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -285,12 +286,22 @@
             this.HasAttachmentcheckBox.UseVisualStyleBackColor = true;
             this.HasAttachmentcheckBox.CheckedChanged += new System.EventHandler(this.HasAttachmentcheckBox_CheckedChanged);
             // 
+            // ExistingSpaceslistBox
+            // 
+            this.ExistingSpaceslistBox.FormattingEnabled = true;
+            this.ExistingSpaceslistBox.Location = new System.Drawing.Point(213, 494);
+            this.ExistingSpaceslistBox.Name = "ExistingSpaceslistBox";
+            this.ExistingSpaceslistBox.Size = new System.Drawing.Size(213, 30);
+            this.ExistingSpaceslistBox.TabIndex = 16;
+            this.ExistingSpaceslistBox.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1416, 530);
+            this.ClientSize = new System.Drawing.Size(1416, 531);
             this.ControlBox = false;
+            this.Controls.Add(this.ExistingSpaceslistBox);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.ColapseExpandButton);
             this.Controls.Add(this.groupBox3);
@@ -342,6 +353,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox HasAttachmentcheckBox;
         private System.Windows.Forms.CheckBox HasContributorcheckBox;
+        private System.Windows.Forms.ListBox ExistingSpaceslistBox;
     }
 }
 

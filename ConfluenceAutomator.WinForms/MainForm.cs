@@ -32,6 +32,11 @@ namespace ConfluenceAutomator.WinForms
             this.TargetSpaceTreeView.Nodes.Add(StructureConstant.GetStructureAsTreeNode());
             this.TargetSpaceTreeView.ExpandAll();
             this.TargetSpaceTreeView.Nodes[0].EnsureVisible();
+
+            foreach (Result item in r.results)
+            {
+                this.ExistingSpaceslistBox.Items.Add(item.key);
+            }
         }
 
         private void RunButton_Click(object sender, EventArgs e)
@@ -45,6 +50,12 @@ namespace ConfluenceAutomator.WinForms
             if (string.IsNullOrEmpty(this.KeyTextbox.Text.Trim()))
             {
                 MessageBox.Show("Key must be defined.", "Validation Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (this.ExistingSpaceslistBox.Items.Contains(this.KeyTextbox.Text.Trim()))
+            {
+                MessageBox.Show("Key is already used. Please try another.", "Validation Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
