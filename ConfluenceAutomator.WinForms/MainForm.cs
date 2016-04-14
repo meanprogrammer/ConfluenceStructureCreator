@@ -1,4 +1,5 @@
 ﻿using ConfluenceAutomator.Library;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,36 @@ namespace ConfluenceAutomator.WinForms
             this.TargetSpaceTreeView.Nodes.Add(StructureConstant.GetStructureAsTreeNode());
             this.TargetSpaceTreeView.ExpandAll();
             this.TargetSpaceTreeView.Nodes[0].EnsureVisible();
+        }
 
-            foreach (Result item in r.results)
+        public static string LogAllCheckedNodes(TreeNode treeNode)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (TreeNode tn in treeNode.Nodes)
             {
-                this.ExistingSpaceslistBox.Items.Add(item.key);
+                if (tn.Checked)
+                {
+                    builder.AppendFormat("{0}{1}", tn.Text, Environment.NewLine);
+                }
+
+                foreach (TreeNode tn2 in tn.Nodes)
+                {
+                    if (tn2.Checked)
+                    {
+                        builder.AppendFormat("{0}{1}{2}", "\t", tn2.Text, Environment.NewLine);
+                    }
+
+                    foreach (TreeNode tn3 in tn2.Nodes)
+                    {
+                        if (tn3.Checked)
+                        {
+                            builder.AppendFormat("{0}{1}{2}", "\t\t", tn3.Text, Environment.NewLine);
+                        }
+                    }
+
+                }
             }
+            return builder.ToString();
         }
 
         private void RunButton_Click(object sender, EventArgs e)
@@ -54,13 +80,18 @@ namespace ConfluenceAutomator.WinForms
                 return;
             }
 
-            if (this.ExistingSpaceslistBox.Items.Contains(this.KeyTextbox.Text.Trim()))
+            ConfluenceSpaceTaskExecutor confSpaceService = new ConfluenceSpaceTaskExecutor(this);
+            AllSpaces r = confSpaceService.Execute();
+
+            if (r.results.Where(c => c.key == this.KeyTextbox.Text.Trim()).FirstOrDefault() != null)
             {
                 MessageBox.Show("Key is already used. Please try another.", "Validation Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            
             FormIsWorking(false);
+
+            Logger.Write(LogAllCheckedNodes(this.ConfluencetreeView.Nodes[0]), "General");
 
 
             var list = StructureConstant.GetTaxonomy();
