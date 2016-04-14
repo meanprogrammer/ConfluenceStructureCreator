@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace ConfluenceAutomator.Library
 {
@@ -112,6 +114,18 @@ namespace ConfluenceAutomator.Library
 
         public static List<ConfluencePage> GetTaxonomy()
         {
+
+            List<ConfluencePage> structure = null;
+            string path = "TargetSpace.xml";
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<ConfluencePage>));
+
+            StreamReader reader = new StreamReader(path);
+            structure = (List<ConfluencePage>)serializer.Deserialize(reader);
+            reader.Close();
+            return structure;
+
+            /*
             var list = new List<ConfluencePage>();
             var a = new ConfluencePage();
             a.Title = "0. Planning Phase";
@@ -226,6 +240,8 @@ namespace ConfluenceAutomator.Library
             list.Add(g);
             
             return list;
+            
+            */
         }
 
         public static TreeNode GetStructureAsTreeNode()

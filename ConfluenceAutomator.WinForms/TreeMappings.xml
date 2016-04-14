@@ -26,6 +26,34 @@
       <FromPageTitle>High Level Solution Design</FromPageTitle>
       <ToPageTitle>0.04 High Level Solutions Design</ToPageTitle>
     </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>Terms of Reference/Statement of Work</FromPageTitle>
+      <ToPageTitle>0.09 Terms of Reference/Statement of Work</ToPageTitle>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>RFI Package</FromPageTitle>
+      <ToPageTitle>0.10 RFI Package</ToPageTitle>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>RFP Package</FromPageTitle>
+      <ToPageTitle>0.11 RFP Package</ToPageTitle>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>Business Requirements</FromPageTitle>
+      <ToPageTitle>0.12 Business Requirements</ToPageTitle>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>Use Cases</FromPageTitle>
+      <ToPageTitle>0.13 Use Cases</ToPageTitle>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>Storyboards/Screen Designs</FromPageTitle>
+      <ToPageTitle>0.14 Storyboards/Screen Designs</ToPageTitle>
+    </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>Storyboards/Screen Designs</FromPageTitle>
+      <ToPageTitle>0.14 Storyboards/Screen Designs</ToPageTitle>
+    </PageTreeMappingItem>
   </Mappings>
   <BackwardMappings>
     <BackwardPageTreeMapping>
