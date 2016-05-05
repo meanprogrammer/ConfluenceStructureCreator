@@ -290,21 +290,36 @@ namespace ConfluenceAutomator.WinForms
         private void HasAttachmentcheckBox_CheckedChanged(object sender, EventArgs e)
         {
             var selectedNode = this.TargetSpaceTreeView.SelectedNode;
-            ConfluencePage cp = selectedNode.Tag as ConfluencePage;
-            if (cp != null)
+            if (selectedNode != null)
             {
-                ((ConfluencePage)selectedNode.Tag).HasAttachmentWidget = ((CheckBox)sender).Checked;
+                ConfluencePage cp = selectedNode.Tag as ConfluencePage;
+                if (cp != null)
+                {
+                    ((ConfluencePage)selectedNode.Tag).HasAttachmentWidget = ((CheckBox)sender).Checked;
+                }
+            }
+            else
+            {
+                this.HasAttachmentcheckBox.Checked = false;
             }
         }
 
         private void HasContributorcheckBox_CheckedChanged(object sender, EventArgs e)
         {
             var selectedNode = this.TargetSpaceTreeView.SelectedNode;
-            ConfluencePage cp = selectedNode.Tag as ConfluencePage;
-            if (cp != null)
+            if (selectedNode != null)
             {
-                ((ConfluencePage)selectedNode.Tag).HasContributorSummaryWidget = ((CheckBox)sender).Checked;
+                ConfluencePage cp = selectedNode.Tag as ConfluencePage;
+                if (cp != null)
+                {
+                    ((ConfluencePage)selectedNode.Tag).HasContributorSummaryWidget = ((CheckBox)sender).Checked;
+                }
             }
+            else
+            {
+                this.HasContributorcheckBox.Checked = false;
+            }
+            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
