@@ -54,6 +54,10 @@
       <FromPageTitle>Storyboards/Screen Designs</FromPageTitle>
       <ToPageTitle>0.14 Storyboards/Screen Designs</ToPageTitle>
     </PageTreeMappingItem>
+    <PageTreeMappingItem>
+      <FromPageTitle>Product Requirements</FromPageTitle>
+      <ToPageTitle>0.15 Product Requirements</ToPageTitle>
+    </PageTreeMappingItem>
   </Mappings>
   <BackwardMappings>
     <BackwardPageTreeMapping>
@@ -114,6 +118,9 @@
       <FromPageTitle>1.14 Transition and Maintenance Plan</FromPageTitle>
       <ToPageTitle>1.14 Transition and Maintenance Plan</ToPageTitle>
     </BackwardPageTreeMapping>
-    
+    <BackwardPageTreeMapping>
+      <FromPageTitle>1.15 Product Requirements</FromPageTitle>
+      <ToPageTitle>1.15 Product Requirements</ToPageTitle>
+    </BackwardPageTreeMapping>
   </BackwardMappings>
 </PageTreeMapping>
