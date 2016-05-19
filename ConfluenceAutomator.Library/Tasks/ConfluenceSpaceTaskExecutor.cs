@@ -33,6 +33,11 @@ namespace ConfluenceAutomator.Library
             return HttpClientHelper.ExecuteGet<AllSpaces>(AppSettingsHelper.GetValue(Strings.CREATE_SPACEURL_KEY), this.logger);
         }
 
+        public AllSpaces ExecuteWeb(string payload, string credentials)
+        {
+            return HttpClientHelper.ExecuteGet<AllSpaces>(AppSettingsHelper.GetValue(Strings.CREATE_SPACEURL_KEY), payload, credentials, this.logger);
+        }
+
         public TreeNode CreateSpaceTreeNode(Result space)
         {
             TreeNode result = new TreeNode(space.name);

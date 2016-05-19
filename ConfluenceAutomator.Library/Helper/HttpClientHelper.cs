@@ -20,6 +20,11 @@ namespace ConfluenceAutomator.Library
             return Execute<T>(url, string.Empty, string.Empty, WebMethod.GET, logger);
         }
 
+        public static T ExecuteGet<T>(string url, string payload, string credential, IFormLogger logger)
+        {
+            return Execute<T>(url, payload, credential, WebMethod.GET, logger);
+        }
+
         public static T ExecutePost<T>(string url, string payload, IFormLogger logger)
         {
             return Execute<T>(url, payload, string.Empty, WebMethod.POST, logger);

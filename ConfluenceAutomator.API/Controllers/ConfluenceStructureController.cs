@@ -27,7 +27,7 @@ namespace ConfluenceAutomator.API.Controllers
 
             ConfluenceContext.SaveCredentials("vd2", "Welcome2");
 
-            var list = StructureConstant.GetTaxonomy();
+            var list = StructureConstant.GetTaxonomy(false);
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(list, this);
 
@@ -79,7 +79,7 @@ namespace ConfluenceAutomator.API.Controllers
         {
             ConfluenceContext.SaveCredentials("vd2", "Welcome2");
 
-            var list = StructureConstant.GetTaxonomy();
+            var list = StructureConstant.GetTaxonomy(false);
 
             ConfluencePageTreeTaskExecutor task = new ConfluencePageTreeTaskExecutor(list, this);
 

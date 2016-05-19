@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -112,11 +114,16 @@ namespace ConfluenceAutomator.Library
         }
         #endregion
 
-        public static List<ConfluencePage> GetTaxonomy()
+        public static List<ConfluencePage> GetTaxonomy(bool isWeb)
         {
 
             List<ConfluencePage> structure = null;
             string path = "TargetSpace.xml";
+
+            if (isWeb)
+            {
+                path = HttpContext.Current.Server.MapPath(string.Format("~/bin/{0}", path));
+            }
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<ConfluencePage>));
 
@@ -248,7 +255,7 @@ namespace ConfluenceAutomator.Library
         {
             TreeNode tn = new TreeNode("Target Space");
 
-            var list = GetTaxonomy();
+            var list = GetTaxonomy(false);
 
             foreach (ConfluencePage c in list)
             {
@@ -261,6 +268,26 @@ namespace ConfluenceAutomator.Library
                     fNode.Nodes.Add(tnc);
                 }
                 tn.Nodes.Add(fNode);
+            }
+            return tn;
+        }
+
+        public static System.Web.UI.WebControls.TreeNode GetStructureAsTreeNodeWeb()
+        {
+            System.Web.UI.WebControls.TreeNode tn = new System.Web.UI.WebControls.TreeNode();
+            var list = GetTaxonomy(true);
+
+            foreach (ConfluencePage c in list)
+            {
+                System.Web.UI.WebControls.TreeNode fNode = new System.Web.UI.WebControls.TreeNode(c.Title);
+                fNode.Value = JsonConvert.SerializeObject(c);
+                foreach (ConfluencePage cc in c.ChildPages)
+                {
+                    System.Web.UI.WebControls.TreeNode tnc = new System.Web.UI.WebControls.TreeNode(cc.Title);
+                    tnc.Value = JsonConvert.SerializeObject(cc);
+                    fNode.ChildNodes.Add(tnc);
+                }
+                tn.ChildNodes.Add(fNode);
             }
 
             return tn;

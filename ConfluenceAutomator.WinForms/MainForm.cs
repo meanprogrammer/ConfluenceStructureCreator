@@ -94,7 +94,7 @@ namespace ConfluenceAutomator.WinForms
             Logger.Write(LogAllCheckedNodes(this.ConfluencetreeView.Nodes[0]), "General");
 
 
-            var list = StructureConstant.GetTaxonomy();
+            var list = StructureConstant.GetTaxonomy(false);
 
             var updatedList = StructureConstant.ExtractFromTreeView(this.TargetSpaceTreeView.Nodes[0]);
 
