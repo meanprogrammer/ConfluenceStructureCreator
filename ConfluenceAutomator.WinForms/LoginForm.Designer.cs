@@ -50,7 +50,7 @@
             this.groupBox1.Size = new System.Drawing.Size(365, 153);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = " Login ";
+            this.groupBox1.Text = " Confluence Login ";
             // 
             // label2
             // 

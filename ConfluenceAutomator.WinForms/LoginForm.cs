@@ -19,8 +19,17 @@ namespace ConfluenceAutomator.WinForms
             InitializeComponent();
         }
 
+        private void EnableLoginControls(bool enabled)
+        {
+            this.Loginbutton.Enabled = enabled;
+            this.UsernametextBox.Enabled = enabled;
+            this.PasswordtextBox.Enabled = enabled;
+        }
+
         private void Loginbutton_Click(object sender, EventArgs e)
         {
+            EnableLoginControls(false);
+
             bool valid = false;
             using (PrincipalContext context = new PrincipalContext(ContextType.Domain))
             {
@@ -28,6 +37,7 @@ namespace ConfluenceAutomator.WinForms
                 if (!valid)
                 {
                     MessageBox.Show(Strings.INVALID_CREDENTIALS, Strings.LOGIN_ERROR, MessageBoxButtons.OK);
+                    EnableLoginControls(true);
                 }
                 else
                 {

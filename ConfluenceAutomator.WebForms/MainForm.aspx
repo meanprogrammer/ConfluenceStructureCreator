@@ -31,6 +31,11 @@
                     <div class="col-md-6">
                         <asp:TextBox ID="DescriptionTextBox" CssClass="form-control" runat="server"></asp:TextBox></div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">Parent Space</div>
+                    <div class="col-md-6">
+                        <asp:DropDownList ID="ParentSpaceDropDownList" runat="server" CssClass="form-control" OnSelectedIndexChanged="ParentSpaceDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList></div>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="row">
@@ -40,7 +45,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-
+                        <asp:TreeView ID="PSpaceTreeView" runat="server" ShowCheckBoxes="All">
+                        </asp:TreeView>
                     </div>
                 </div>
             </div>
@@ -52,7 +58,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <asp:TreeView ID="ParentSpaceTreeView" runat="server" ShowCheckBoxes="All">
+                        <asp:TreeView ID="TargetSpaceTreeView" runat="server">
                         </asp:TreeView>
                     </div>
                 </div>

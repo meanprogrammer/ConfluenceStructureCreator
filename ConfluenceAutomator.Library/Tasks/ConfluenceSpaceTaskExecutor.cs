@@ -51,6 +51,19 @@ namespace ConfluenceAutomator.Library
             return result;
         }
 
+        public System.Web.UI.WebControls.TreeNode CreateSpaceTreeNodeWeb(Result space)
+        {
+            System.Web.UI.WebControls.TreeNode result = new System.Web.UI.WebControls.TreeNode(space.name);
+            if (space == null)
+                return result;
+
+            string childUrl = AppSettingsHelper.GetValue(Strings.BASEURL_KEY) + space._expandable.homepage + Strings.CHILDPAGE_PATH;
+            var rootPages = HttpClientHelper.ExecuteGet<ChildPagesOutput>(childUrl, string.Empty, "vd2:Welcome4", this.logger);
+            CreateIndividualTreeNodeWeb(result, rootPages.results);
+
+            return result;
+        }
+
         private void CreateIndividualTreeNode(TreeNode currentTreeNode, List<ChildPagesOutput_Result> pages)
         {
             foreach (var item in pages)
@@ -75,6 +88,36 @@ namespace ConfluenceAutomator.Library
                     CreateIndividualTreeNode(currentTreeNode, childPages.results);
                 }
             }
-        } 
+        }
+
+        private void CreateIndividualTreeNodeWeb(System.Web.UI.WebControls.TreeNode currentTreeNode, List<ChildPagesOutput_Result> pages)
+        {
+            foreach (var item in pages)
+            {
+                string childUrl = AppSettingsHelper.GetValue(Strings.BASEURL_KEY) + string.Format("/rest/api/content/{0}/child/page", item.id);
+
+                ChildPagesOutput childPages = HttpClientHelper.ExecuteGet<ChildPagesOutput>(childUrl, string.Empty, "vd2:Welcome2", this.logger);
+
+                System.Web.UI.WebControls.TreeNode newNode = new System.Web.UI.WebControls.TreeNode();
+                newNode.Text = item.title;
+                newNode.Value = JsonConvert.SerializeObject(item);
+
+                currentTreeNode.ChildNodes.Add(newNode);
+
+                if (childPages.results.Count > 0)
+                {
+                    CreateIndividualTreeNodeWeb(currentTreeNode.ChildNodes[currentTreeNode.ChildNodes.Count -1], childPages.results);
+                }
+                else
+                {
+                    CreateIndividualTreeNodeWeb(currentTreeNode, childPages.results);
+                }
+            }
+        }
+
+        private System.Web.UI.WebControls.TreeNode GetLastNode(System.Web.UI.WebControls.TreeNode currentTreeNode)
+        {
+            return null;
+        }
     }
 }

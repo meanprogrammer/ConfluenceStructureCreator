@@ -49,12 +49,30 @@ namespace ConfluenceAutomator.WebForms {
         protected global::System.Web.UI.WebControls.TextBox DescriptionTextBox;
         
         /// <summary>
-        /// ParentSpaceTreeView control.
+        /// ParentSpaceDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView ParentSpaceTreeView;
+        protected global::System.Web.UI.WebControls.DropDownList ParentSpaceDropDownList;
+        
+        /// <summary>
+        /// PSpaceTreeView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TreeView PSpaceTreeView;
+        
+        /// <summary>
+        /// TargetSpaceTreeView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TreeView TargetSpaceTreeView;
     }
 }
