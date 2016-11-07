@@ -203,7 +203,7 @@
             // 
             // CleanUpButton
             // 
-            this.CleanUpButton.Location = new System.Drawing.Point(8, 484);
+            this.CleanUpButton.Location = new System.Drawing.Point(8, 483);
             this.CleanUpButton.Name = "CleanUpButton";
             this.CleanUpButton.Size = new System.Drawing.Size(89, 40);
             this.CleanUpButton.TabIndex = 11;
@@ -302,7 +302,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1416, 531);
+            this.ClientSize = new System.Drawing.Size(1416, 530);
             this.ControlBox = false;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
